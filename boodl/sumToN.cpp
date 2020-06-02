@@ -19,41 +19,12 @@ typedef long long ll;
     cin.tie(NULL);               \
     cout.tie(NULL);
 
-template <typename A, typename B>
-inline void chmin(A &a, B b)
-{
-    if (a > b)
-        a = b;
-}
-template <typename A, typename B>
-inline void chmax(A &a, B b)
-{
-    if (a < b)
-        a = b;
-}
 template <typename T>
 void print(vector<T> &a)
 {
     for (int i = 0; i < a.size(); i++)
         cout << a[i] << ' ';
     cout << en;
-}
-template <typename T>
-void print(deque<T> &a)
-{
-    for (int i = 0; i < a.size(); i++)
-        cout << a[i] << ' ';
-    cout << en;
-}
-template <typename T>
-void print(vector<vector<T>> &a)
-{
-    for (int i = 0; i < a.size(); i++)
-    {
-        for (int j = 0; j < a[i].size(); j++)
-            cout << a[i][j] << ' ';
-        cout << en;
-    }
 }
 
 vector<int> sumToN(vector<int> nums, int target)
