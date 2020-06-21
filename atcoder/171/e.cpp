@@ -59,6 +59,17 @@ void print(vector<vector<T>> &a)
 int main()
 {
 	fast;
-	int n;
+	int n, s = 0;
 	cin >> n;
+	vi a(n);
+	forn
+	{
+		cin >> a[i];
+		s ^= a[i];
+	}
+	forn
+	{
+		a[i] ^= s;
+	}
+	print(a);
 }
