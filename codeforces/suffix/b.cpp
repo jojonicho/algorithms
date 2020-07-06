@@ -73,12 +73,18 @@ ll pw(ll b, ll e)
 
 void solve()
 {
-	int n, k;
+	int n;
+	cin >> n;
 }
 
 int main()
 {
 	fast;
-	solve();
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		solve();
+	}
 	return 0;
 }

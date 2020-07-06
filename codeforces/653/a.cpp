@@ -71,14 +71,29 @@ ll pw(ll b, ll e)
 	return res;
 }
 
+ll fact[200005], inv[200005];
+ll C(ll n, ll k)
+{
+	return (((fact[n] * inv[k]) % mod) * inv[n - k]) % mod;
+}
+
 void solve()
 {
-	int n, k;
+	int x, y, n;
+	cin >> x >> y >> n;
+	int cur = x * (int)(n / x);
+	int ans = cur + y <= n ? cur + y : cur - (x - y);
+	cout << ans << en;
 }
 
 int main()
 {
 	fast;
-	solve();
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		solve();
+	}
 	return 0;
 }

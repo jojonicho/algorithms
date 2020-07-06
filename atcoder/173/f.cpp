@@ -46,10 +46,41 @@ inline void chmax(A &a, B b)
 	if (a < b)
 		a = b;
 }
+const int mxn = 2e5;
+int n;
+ll ans;
+vi adj[mxn];
+
+void dfs(int u = 0, int p = -1)
+{
+	for (int v : adj[u])
+		if (v ^ p)
+		{
+			cout << v << " " << p << " " << (v ^ p) << en;
+			dfs(v, u);
+		}
+	if (u)
+	{
+		if (p < u)
+			ans += (ll)(u - p) * (n - u);
+		else
+			ans += (ll)(u + 1) * (p - u);
+	}
+	else
+		ans += n;
+}
 
 int main()
 {
 	fast;
-	int n;
 	cin >> n;
+	FOR(n - 1)
+	{
+		int u, v;
+		cin >> u >> v, --u, --v;
+		adj[u].push_back(v);
+		adj[v].push_back(u);
+	}
+	dfs(0);
+	cout << ans;
 }

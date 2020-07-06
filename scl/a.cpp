@@ -79,31 +79,18 @@ ll C(ll n, ll k)
 
 void solve()
 {
-	int n, k;
-	cin >> n >> k;
-	vi a(n);
+	int n, m, k;
+	cin >> n >> m >> k;
 	forn
 	{
-		cin >> a[i];
+		int a, b, c;
+		cin >> a >> b >> c;
 	}
-	sort(all(a));
-	ll ans = 0;
-	for (int i = 0; i < (k + 1) / 2; i++)
-	{
-		ans += a[i];
-	}
-	cout << ans << en;
 }
 
 int main()
 {
 	fast;
-	int t;
-	cin >> t;
-	for (int i = 1; i <= t; i++)
-	{
-		cout << "Case " << i << ": ";
-		solve();
-	}
+	solve();
 	return 0;
 }

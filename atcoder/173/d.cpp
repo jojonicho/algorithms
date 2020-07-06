@@ -47,9 +47,39 @@ inline void chmax(A &a, B b)
 		a = b;
 }
 
+// const int mxN = 1e9 + 7;
+const int M = 1e9 + 7;
+
+ll pw(ll b, ll e)
+{
+	ll res = 1;
+	while (e)
+	{
+		if (e % 2)
+			res = (res * b) % M;
+		b = (b * b) % M;
+		e >>= 1; // e/=2;
+	}
+	return res;
+}
+
 int main()
 {
 	fast;
 	int n;
 	cin >> n;
+	vll a(n), b;
+	FOR(n)
+	cin >> a[i];
+	sort(all(a), greater<int>());
+	FOR(n)
+	{
+		b.pb(a[i]);
+		if (i)
+			b.pb(a[i]);
+	}
+	ll ans = 0;
+	FOR(n - 1)
+	ans += b[i];
+	cout << ans << en;
 }

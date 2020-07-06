@@ -71,14 +71,66 @@ ll pw(ll b, ll e)
 	return res;
 }
 
-void solve()
+ll fact[200005], inv[200005];
+ll C(ll n, ll k)
 {
-	int n, k;
+	return (((fact[n] * inv[k]) % mod) * inv[n - k]) % mod;
 }
 
 int main()
 {
 	fast;
-	solve();
+	string s;
+	cin >> s;
+	s += '$';
+	int n = s.size();
+	vi p(n); // ordering
+	vi c(n); // equivalence classes
+	{
+		// k == 0 -> sort single characters
+		vector<pair<char, int>> a(n);
+		forn a[i] = {s[i], i};
+		sort(all(a));
+
+		forn p[i] = a[i].second;
+		c[p[0]] = 0;
+		for (int i = 1; i < n; i++)
+		{
+			if (a[i].first == a[i - 1].first)
+			{
+				c[p[i]] = c[p[i - 1]];
+			}
+			else
+			{
+				c[p[i]] = c[p[i - 1]] + 1;
+			}
+		}
+	}
+
+	int k = 0;
+	while ((1 << k) < n)
+	{
+		vector<pair<pair<int, int>, int>> a(n);
+		for (int i = 0; i < n; i++)
+		{
+			a[i] = {{c[i], c[(i + (1 << k)) % n]}, i};
+		}
+		sort(all(a));
+		forn p[i] = a[i].second;
+		c[p[0]] = 0;
+		for (int i = 1; i < n; i++)
+		{
+			if (a[i].first == a[i - 1].first)
+			{
+				c[p[i]] = c[p[i - 1]];
+			}
+			else
+			{
+				c[p[i]] = c[p[i - 1]] + 1;
+			}
+		}
+		k++;
+	}
+	forn cout << p[i] << " ";
 	return 0;
 }

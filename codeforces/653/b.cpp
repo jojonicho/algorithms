@@ -73,12 +73,32 @@ ll pw(ll b, ll e)
 
 void solve()
 {
-	int n, k;
+	int n, ans = 0;
+	cin >> n;
+	while (n % 6 == 0)
+	{
+		n /= 6;
+		ans++;
+	}
+	while (n % 3 == 0)
+	{
+		n /= 3;
+		ans += 2;
+	}
+	if (n != 1)
+		cout << -1 << en;
+	else
+		cout << ans << en;
 }
 
 int main()
 {
 	fast;
-	solve();
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		solve();
+	}
 	return 0;
 }

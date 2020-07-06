@@ -55,30 +55,32 @@ void print(vector<vector<T>> &a)
 		cout << en;
 	}
 }
-
-const int mod = 1e9 + 7;
-
-ll pw(ll b, ll e)
-{
-	ll res = 1;
-	while (e)
-	{
-		if (e % 2)
-			res = (res * b) % mod;
-		b = (b * b) % mod;
-		e >>= 1; // e/=2;
-	}
-	return res;
-}
-
-void solve()
-{
-	int n, k;
-}
-
+int h, w, k, ans;
+string s[6];
 int main()
 {
 	fast;
-	solve();
-	return 0;
+	cin >> h >> w >> k;
+	fork(i, h)
+	{
+		cin >> s[i];
+	}
+	fork(i, 1 << h)
+	{
+		fork(j, 1 << w)
+		{
+			int c = 0;
+			fork(i2, h)
+			{
+				fork(j2, w)
+				{
+					if (i >> i2 & 1 && j >> j2 & 1 && s[i2][j2] == '#')
+						c++;
+				}
+			}
+			if (c == k)
+				ans++;
+		}
+	}
+	cout << ans << en;
 }

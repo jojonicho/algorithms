@@ -71,14 +71,30 @@ ll pw(ll b, ll e)
 	return res;
 }
 
-void solve()
-{
-	int n, k;
-}
-
 int main()
 {
 	fast;
-	solve();
+	string s;
+	cin >> s;
+	int t = s.size();
+	int n;
+	cin >> n;
+	forn
+	{
+		string k;
+		cin >> k;
+		if (s.find(k) != string::npos)
+		{
+			cout << "Yes" << en;
+		}
+		else
+			cout << "No" << en;
+		// int m = k.size();
+		// for (int i = 0; i < t - m; i++)
+		// {
+		// 	cout << i << " " << i + m << en;
+		// 	cout << s.substr(i, i + m - 1) << en;
+		// }
+	}
 	return 0;
 }

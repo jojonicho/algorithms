@@ -56,7 +56,7 @@ void print(vector<vector<T>> &a)
 	}
 }
 
-const int mod = 1e9 + 7;
+const int mod = 998244353;
 
 ll pw(ll b, ll e)
 {
@@ -73,12 +73,19 @@ ll pw(ll b, ll e)
 
 void solve()
 {
-	int n, k;
+	int n;
+	cin >> n;
+
 }
 
 int main()
 {
 	fast;
-	solve();
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		solve();
+	}
 	return 0;
 }

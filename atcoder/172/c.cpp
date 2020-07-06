@@ -55,37 +55,29 @@ void print(vector<vector<T>> &a)
 		cout << en;
 	}
 }
-long long a[200004], b[200004];
 int main()
 {
 	fast;
 	int n, m, k, ans = 0;
 	cin >> n >> m >> k;
-	ll tot = 0;
-	for (int i = 1; i <= n; i++)
+	vi a(n + 1), b(+1);
+	forn
 	{
-		ll t;
-		cin >> t;
-		tot += t;
-		a[i] = a[i - 1] + t;
+		cin >> a[i + 1];
+		a[i + 1] += a[i];
 	}
-	for (int i = 1; i <= m; i++)
+	fork(i, m)
 	{
-		ll t;
-		cin >> t;
-		tot += t;
-		b[i] = b[i - 1] + t;
+		cin >> b[i + 1];
+		b[i + 1] += b[i];
 	}
-	if (tot <= k)
+	for (int i = 0, j = m; i <= n; i++)
 	{
-		cout << n + m << en;
-		return 0;
+		if (a[i] > k)
+			break;
+		while (a[i] + b[j] > k)
+			j--;
+		ans = max(i + j, ans);
 	}
-	for (int i = 0; i <= n; i++)
-		if (k >= a[i])
-		{
-			int res = upper_bound(b + 1, b + 1 + m, k - a[i]) - b - 1;
-			ans = max(ans, res + i);
-		}
 	cout << ans << en;
 }

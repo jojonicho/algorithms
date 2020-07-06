@@ -56,29 +56,20 @@ void print(vector<vector<T>> &a)
 	}
 }
 
-const int mod = 1e9 + 7;
-
-ll pw(ll b, ll e)
-{
-	ll res = 1;
-	while (e)
-	{
-		if (e % 2)
-			res = (res * b) % mod;
-		b = (b * b) % mod;
-		e >>= 1; // e/=2;
-	}
-	return res;
-}
-
-void solve()
-{
-	int n, k;
-}
-
 int main()
 {
 	fast;
-	solve();
-	return 0;
+	ll n, ans = 0;
+	cin >> n;
+	vector<int> a(n);
+	for (ll i = 1; i <= n; i++)
+	{
+		for (int j = 1; j * i <= n; j++)
+			a[i * j]++;
+	}
+	for (ll i = 1; i <= n; i++)
+	{
+		ans += i * a[i];
+	}
+	cout << ans << en;
 }

@@ -73,12 +73,28 @@ ll pw(ll b, ll e)
 
 void solve()
 {
-	int n, k;
+	int n, cur = 0, ans = 0;
+	string s;
+	cin >> n >> s;
+	forn
+	{
+		if (s[i] == '(')
+			cur++;
+		else
+			cur--;
+		ans = min(ans, cur);
+	}
+	cout << -ans << endl;
 }
 
 int main()
 {
 	fast;
-	solve();
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		solve();
+	}
 	return 0;
 }

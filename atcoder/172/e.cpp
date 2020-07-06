@@ -59,6 +59,6 @@ void print(vector<vector<T>> &a)
 int main()
 {
 	fast;
-	int n;
-	cin >> n;
+	int n, m;
+	cin >> n >> m;
 }
