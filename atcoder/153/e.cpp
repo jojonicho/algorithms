@@ -10,7 +10,7 @@ typedef long long ll;
 #define all(x) (x).begin(), (x).end()
 #define en '\n'
 #define FILL(x, v) memset(x, v, sizeof(x))
-#define pb push_back
+#define pb push_bacn
 #define fast                     \
 	ios::sync_with_stdio(false); \
 	cin.tie(NULL);               \
@@ -46,58 +46,20 @@ inline void chmax(A &a, B b)
 	if (a < b)
 		a = b;
 }
-const int mxn = 2e5;
-int n;
-ll ans;
-vi adj[mxn];
-
-// void dfs(int u = 0, int p = -1)
-// {
-// 	for (int v : adj[u])
-// 		if (v ^ p) // if v != p
-// 		{
-// 			// cout << v << " " << p << " " << (v ^ p) << en;
-// 			dfs(v, u);
-// 		}
-// 	if (u)
-// 	{
-// 		if (p < u)
-// 			ans += (ll)(u - p) * (n - u);
-// 		else
-// 			ans += (ll)(u + 1) * (p - u);
-// 	}
-// 	else
-// 		ans += n;
-// }
-void dfs(int u = 0, int p = -1)
-{
-	for (int v : adj[u])
-		if (v != p)
-			dfs(v, u);
-	if (u)
-	{
-		if (p < u)
-			ans += (ll)(u - p) * (n - u);
-		else
-			ans += (ll)(u + 1) * (p - u);
-	}
-	else
-	{
-		ans += n;
-	}
-}
 
 int main()
 {
 	fast;
-	cin >> n;
-	FOR(n - 1)
+	int h, n;
+	cin >> h >> n;
+	vll dp(h + 1, 1e8 + 1);
+	dp[0] = 0;
+	FOR(n)
 	{
-		int u, v;
-		cin >> u >> v, --u, --v;
-		adj[u].pb(v);
-		adj[v].pb(u);
+		int c, d;
+		cin >> c >> d;
+		FOR(j, h + 1)
+		dp[j] = min(dp[j], dp[max(0, j - c)] + d);
 	}
-	dfs();
-	cout << ans;
+	cout << dp[h];
 }

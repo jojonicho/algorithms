@@ -46,58 +46,49 @@ inline void chmax(A &a, B b)
 	if (a < b)
 		a = b;
 }
-const int mxn = 2e5;
-int n;
-ll ans;
-vi adj[mxn];
 
-// void dfs(int u = 0, int p = -1)
-// {
-// 	for (int v : adj[u])
-// 		if (v ^ p) // if v != p
-// 		{
-// 			// cout << v << " " << p << " " << (v ^ p) << en;
-// 			dfs(v, u);
-// 		}
-// 	if (u)
-// 	{
-// 		if (p < u)
-// 			ans += (ll)(u - p) * (n - u);
-// 		else
-// 			ans += (ll)(u + 1) * (p - u);
-// 	}
-// 	else
-// 		ans += n;
-// }
-void dfs(int u = 0, int p = -1)
+// const int mxN = 1e9 + 7;
+const int M = 1e9 + 7;
+
+ll pw(ll b, ll e)
 {
-	for (int v : adj[u])
-		if (v != p)
-			dfs(v, u);
-	if (u)
+	ll res = 1;
+	while (e)
 	{
-		if (p < u)
-			ans += (ll)(u - p) * (n - u);
-		else
-			ans += (ll)(u + 1) * (p - u);
+		if (e % 2)
+			res = (res * b) % M;
+		b = (b * b) % M;
+		e >>= 1; // e/=2;
 	}
-	else
-	{
-		ans += n;
-	}
+	return res;
 }
+
+string s[6];
 
 int main()
 {
 	fast;
-	cin >> n;
-	FOR(n - 1)
+	int h, w, k, ans = 0;
+	cin >> h >> w >> k;
+	FOR(h)
+	cin >> s[i];
+	FOR(1 << h)
 	{
-		int u, v;
-		cin >> u >> v, --u, --v;
-		adj[u].pb(v);
-		adj[v].pb(u);
+		FOR(j, 1 << w)
+		{
+			int black = 0;
+			FOR(i2, h)
+			{
+				FOR(j2, w)
+				{
+					// if current column, row matches with the bitmask
+					if (!(i & (1 << i2)) && !(j & (1 << j2)) && s[i2][j2] == '#')
+						black++;
+				}
+			}
+			if (black == k)
+				ans++;
+		}
 	}
-	dfs();
 	cout << ans;
 }

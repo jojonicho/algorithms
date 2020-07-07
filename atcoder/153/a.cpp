@@ -46,58 +46,41 @@ inline void chmax(A &a, B b)
 	if (a < b)
 		a = b;
 }
-const int mxn = 2e5;
-int n;
-ll ans;
-vi adj[mxn];
 
-// void dfs(int u = 0, int p = -1)
-// {
-// 	for (int v : adj[u])
-// 		if (v ^ p) // if v != p
-// 		{
-// 			// cout << v << " " << p << " " << (v ^ p) << en;
-// 			dfs(v, u);
-// 		}
-// 	if (u)
-// 	{
-// 		if (p < u)
-// 			ans += (ll)(u - p) * (n - u);
-// 		else
-// 			ans += (ll)(u + 1) * (p - u);
-// 	}
-// 	else
-// 		ans += n;
-// }
-void dfs(int u = 0, int p = -1)
+// const int mxN = 1e9 + 7;
+const int M = 1e9 + 7;
+
+ll pw(ll b, ll e)
 {
-	for (int v : adj[u])
-		if (v != p)
-			dfs(v, u);
-	if (u)
+	ll res = 1;
+	while (e)
 	{
-		if (p < u)
-			ans += (ll)(u - p) * (n - u);
-		else
-			ans += (ll)(u + 1) * (p - u);
+		if (e % 2)
+			res = (res * b) % M;
+		b = (b * b) % M;
+		e >>= 1; // e/=2;
 	}
-	else
-	{
-		ans += n;
-	}
+	return res;
 }
+
+// ll fact[mxN + 1], inv[mxN + 1];
+// ll C(ll n, ll k)
+// {
+// 	return (((fact[n] * inv[k]) % M) * inv[n - k]) % M;
+// }
+// ll f1[M + 1], f2[M + 1];
+// ll C(int n, int k)
+// {
+// 	return (((f1[n] * f2[k]) % M) * f2[n - k]) % M;
+// }
 
 int main()
 {
 	fast;
-	cin >> n;
-	FOR(n - 1)
-	{
-		int u, v;
-		cin >> u >> v, --u, --v;
-		adj[u].pb(v);
-		adj[v].pb(u);
-	}
-	dfs();
-	cout << ans;
+	int n, k;
+	cin >> n >> k;
+	if (n % k)
+		cout << n / k + 1;
+	else
+		cout << n / k;
 }

@@ -46,58 +46,42 @@ inline void chmax(A &a, B b)
 	if (a < b)
 		a = b;
 }
-const int mxn = 2e5;
-int n;
-ll ans;
-vi adj[mxn];
 
-// void dfs(int u = 0, int p = -1)
-// {
-// 	for (int v : adj[u])
-// 		if (v ^ p) // if v != p
-// 		{
-// 			// cout << v << " " << p << " " << (v ^ p) << en;
-// 			dfs(v, u);
-// 		}
-// 	if (u)
-// 	{
-// 		if (p < u)
-// 			ans += (ll)(u - p) * (n - u);
-// 		else
-// 			ans += (ll)(u + 1) * (p - u);
-// 	}
-// 	else
-// 		ans += n;
-// }
-void dfs(int u = 0, int p = -1)
+// const int mxN = 1e9 + 7;
+const int M = 1e9 + 7;
+
+ll pw(ll b, ll e)
 {
-	for (int v : adj[u])
-		if (v != p)
-			dfs(v, u);
-	if (u)
+	ll res = 1;
+	while (e)
 	{
-		if (p < u)
-			ans += (ll)(u - p) * (n - u);
-		else
-			ans += (ll)(u + 1) * (p - u);
+		if (e % 2)
+			res = (res * b) % M;
+		b = (b * b) % M;
+		e >>= 1; // e/=2;
 	}
-	else
-	{
-		ans += n;
-	}
+	return res;
 }
 
 int main()
 {
 	fast;
+	int n, cnt = 0;
 	cin >> n;
-	FOR(n - 1)
+	vll a(n), b;
+	FOR(n)
+	cin >> a[i];
+	sort(all(a), greater<int>());
+	ll ans = 0;
+	for (int i = 0; cnt < n - 1 && i < n; i++)
 	{
-		int u, v;
-		cin >> u >> v, --u, --v;
-		adj[u].pb(v);
-		adj[v].pb(u);
+		ans += a[i];
+		cnt++;
+		if (cnt < n - 1 && i)
+		{
+			ans += a[i];
+			cnt++;
+		}
 	}
-	dfs();
-	cout << ans;
+	cout << ans << en;
 }
