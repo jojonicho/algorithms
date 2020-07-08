@@ -52,4 +52,17 @@ int main()
 	fast;
 	int n;
 	cin >> n;
+	set<int> st;
+	FOR(n)
+	{
+		int t;
+		cin >> t;
+		if (st.find(t) != st.end())
+		{
+			cout << "NO";
+			return 0;
+		}
+		st.insert(t);
+	}
+	cout << "YES";
 }
