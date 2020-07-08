@@ -72,6 +72,9 @@ ll nck(int n, int k)
 int main()
 {
 	fast;
-	int n;
-	cin >> n;
+	ll n, r;
+	cin >> n >> r;
+	if (n < 10)
+		r += 100 * (10 - n);
+	cout << r;
 }

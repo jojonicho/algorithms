@@ -47,31 +47,10 @@ inline void chmax(A &a, B b)
 		a = b;
 }
 
-const int mxn = 5e5;
-const int M = 1e9 + 7;
-
-ll pw(ll b, ll e)
-{
-	ll res = 1;
-	while (e)
-	{
-		if (e % 2)
-			res = (res * b) % M;
-		b = (b * b) % M;
-		e >>= 1; // e/=2;
-	}
-	return res;
-}
-
-ll iv[mxn + 1], f1[mxn + 1], f2[mxn + 1];
-ll nck(int n, int k)
-{
-	return f1[n] * f2[k] % M * f2[n - k] % M;
-}
-
 int main()
 {
 	fast;
-	int n;
-	cin >> n;
+	ll n, a, b;
+	cin >> n >> a >> b;
+	cout << a * (n / (a + b)) + min(a, n % (a + b));
 }
