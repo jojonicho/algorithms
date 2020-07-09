@@ -47,9 +47,23 @@ inline void chmax(A &a, B b)
 		a = b;
 }
 
+const int nmx = 1e6 + 5;
+int dp[nmx][2];
+
 int main()
 {
 	fast;
-	int n;
-	cin >> n;
+	string s;
+	cin >> s;
+	s = '0' + s;
+	int n = s.size();
+	dp[0][1] = 1;
+	for (int i = 1; i < n; i++)
+	{
+		int num = int(s[i] - '0');
+		dp[i][0] = min(dp[i - 1][0] + num, dp[i - 1][1] + 10 - num);
+		dp[i][1] = min(dp[i - 1][0] + num + 1, dp[i - 1][1] + (10 - num - 1));
+	}
+	cout << dp[n - 1][0];
+	return 0;
 }
