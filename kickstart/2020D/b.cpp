@@ -49,7 +49,7 @@ inline void chmax(A &a, B b)
 
 void solve()
 {
-	int n, ans = 0;
+	int n;
 	cin >> n;
 	vll a(n);
 	FOR(n)
@@ -64,11 +64,11 @@ void solve()
 			FOR(y, M)
 			{
 				int cost = 1;
-				if (x < y and (a[i - 1] < a[i]))
+				if (x < y && (a[i - 1] < a[i]))
 					cost = 0;
-				if (x > y and (a[i - 1] > a[i]))
+				if (x > y && (a[i - 1] > a[i]))
 					cost = 0;
-				if (x == y and (a[i - 1] == a[i]))
+				if (x == y && (a[i - 1] == a[i]))
 					cost = 0;
 				chmin(nx[y], dp[x] + cost);
 			}

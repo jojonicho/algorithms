@@ -63,5 +63,6 @@ int main()
 		a[y].pb(x);
 	}
 	FOR(k)
-	cin >> c[i] >> d[i];
+	{
+	}
 }
