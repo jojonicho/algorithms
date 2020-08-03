@@ -3,6 +3,14 @@ using namespace std;
 using namespace __detail;
 
 typedef long long ll;
+typedef pair<int, int> P;
+
+#ifdef _DEBUG
+#define dbg(...) cerr << "LINE(" << __LINE__ << ") -> [" << #__VA_ARGS__ << "]: [", DBG(__VA_ARGS__)
+#else
+#define dbg(...) 0
+#endif
+
 #define ar array
 #define vi vector<int>
 #define vvi vector<vector<int>>
@@ -47,22 +55,80 @@ inline void chmax(A &a, B b)
 		a = b;
 }
 
+struct UnionFind
+{
+	vector<int> d;
+	UnionFind(int n = 0) : d(n, -1) {}
+
+	int find(int x)
+	{
+		// not visited or parent
+		if (d[x] < 0)
+			return x;
+		return d[x] = find(d[x]); // dont really need to assign again
+	}
+
+	bool unite(int x, int y)
+	{
+		x = find(x);
+		y = find(y);
+		if (x == y)
+			return false;
+		if (x > y)
+			swap(x, y);
+		if (d[x] > d[y])
+			swap(x, y);
+		d[x] += d[y];
+		d[y] = x;
+
+		return true;
+	}
+
+	bool same(int x, int y) { return find(x) == find(y); }
+
+	int size(int x) { return -d[find(x)]; }
+};
+
 int main()
 {
 	fast;
 	int n, m, k;
 	cin >> n >> m >> k;
-	vvi a(n);
+	vvi fr(n), bl(n);
+	UnionFind uf(n);
 	FOR(m)
 	{
 		int x, y;
 		cin >> x >> y;
 		x--;
 		y--;
-		a[x].pb(y);
-		a[y].pb(x);
+		fr[x].pb(y);
+		fr[y].pb(x);
+		uf.unite(x, y);
 	}
 	FOR(k)
 	{
+		int x, y;
+		cin >> x >> y;
+		x--;
+		y--;
+		bl[x].pb(y);
+		bl[y].pb(x);
 	}
+	FOR(n)
+	{
+		// total connected - self node - edges
+		int ans = uf.size(i) - 1 - fr[i].size();
+		for (auto &x : bl[i])
+			if (uf.same(i, x))
+				ans--;
+		// printf("%d%c", ans, (i == n - 1 ? '\n' : ' '));
+		cout << ans << " ";
+	}
+	cout << en;
+	// for (auto c : uf.d)
+	// {
+	// 	cout << c << " ";
+	// }
+	// cout << en;
 }
