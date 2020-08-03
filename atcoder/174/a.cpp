@@ -46,7 +46,8 @@ inline void chmax(A &a, B b)
 	if (a < b)
 		a = b;
 }
-const int mxn = 2e5;
+
+const int mxn = 5e5;
 const int M = 1e9 + 7;
 
 ll pw(ll b, ll e)
@@ -62,25 +63,16 @@ ll pw(ll b, ll e)
 	return res;
 }
 
-ll iv[mxn + 1];
+ll iv[mxn + 1], f1[mxn + 1], f2[mxn + 1];
 ll nck(int n, int k)
 {
-	ll ans = 1;
-	for (int i = 1; i <= k; i++)
-		ans = ans * (n - i + 1) % M * iv[i] % M;
-	return ans;
+	return f1[n] * f2[k] % M * f2[n - k] % M;
 }
+
 int main()
 {
 	fast;
-	iv[1] = 1;
-	for (int i = 2; i <= mxn; i++)
-		iv[i] = M - M / i * iv[M % i] % M;
-	int n, a, b;
-	cin >> n >> a >> b;
-	ll ans = pw(2, n) - 1;
-	// cout << (ans + 2 * M - nck(n, a) - nck(n, b) + M) % M;
-	ans = (ans - nck(n,a) - nck(n,b))%M;
-	if(ans < 0) ans += M;
-	cout << ans;
+	int n;
+	cin >> n;
+	cout << (n >= 30 ? "Yes" : "No");
 }
