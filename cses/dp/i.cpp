@@ -47,19 +47,69 @@ inline void chmax(A &a, B b)
 		a = b;
 }
 
-ll help(ll h)
+const int mxn = 5e5;
+const int M = 1e9 + 7;
+
+ll pw(ll b, ll e)
 {
-	if (!h)
-		return 0;
-	if (h == 1)
-		return 1;
-	return 2 * help(h / 2) + 1;
+	ll res = 1;
+	while (e)
+	{
+		if (e % 2)
+			res = (res * b) % M;
+		b = (b * b) % M;
+		e >>= 1; // e/=2;
+	}
+	return res;
+}
+
+ll iv[mxn + 1], f1[mxn + 1], f2[mxn + 1];
+ll nck(int n, int k)
+{
+	return f1[n] * f2[k] % M * f2[n - k] % M;
 }
 
 int main()
 {
 	fast;
-	ll h;
-	cin >> h;
-	cout << help(h);
+	string s, t;
+	cin >> s >> t;
+	int n = s.size(), m = t.size();
+	vvi dp(n + 1, vi(m + 1, 1e9));
+	for (int i = 1; i <= n; i++)
+		dp[i][0] = i;
+	for (int j = 1; j <= m; j++)
+		dp[0][j] = j;
+	// FOR(n)
+	// {
+	// 	FOR(j, m)
+	// 	{
+	// 		if (s[i] == t[j])
+	// 			dp[i + 1][j + 1] = dp[i][j];
+	// 		else
+	// 		{
+	// 			int ins = dp[i][j + 1];
+	// 			int del = dp[i + 1][j];
+	// 			int rep = dp[i][j];
+	// 			dp[i + 1][j + 1] = min({ins, del, rep}) + 1;
+	// 		}
+	// 	}
+	// }
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= m; j++)
+		{
+			if (s[i - 1] == t[j - 1])
+				dp[i][j] = dp[i - 1][j - 1];
+			else
+			{
+				// dp[i][j] = min(dp[i - 1][j - 1], min(dp[i][j - 1], dp[i - 1][j])) + 1;l
+				int ins = dp[i][j - 1];
+				int del = dp[i - 1][j];
+				int rep = dp[i - 1][j - 1];
+				dp[i][j] = min({ins, del, rep}) + 1;
+			}
+		}
+	}
+	cout << dp[n][m];
 }

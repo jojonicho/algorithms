@@ -7,6 +7,7 @@ typedef long long ll;
 #define vi vector<int>
 #define vvi vector<vector<int>>
 #define vll vector<long long>
+#define vvll vector<vector<long long>>
 #define all(x) (x).begin(), (x).end()
 #define en '\n'
 #define FILL(x, v) memset(x, v, sizeof(x))
@@ -47,19 +48,30 @@ inline void chmax(A &a, B b)
 		a = b;
 }
 
-ll help(ll h)
-{
-	if (!h)
-		return 0;
-	if (h == 1)
-		return 1;
-	return 2 * help(h / 2) + 1;
-}
+const int M = 1e9 + 7;
 
 int main()
 {
 	fast;
-	ll h;
-	cin >> h;
-	cout << help(h);
+	int n, x;
+	cin >> n >> x;
+	// max page given price
+	vi h(n), s(n), dp(x + 1);
+	FOR(n)
+	cin >> h[i];
+	FOR(n)
+	cin >> s[i];
+	dp[0] = 0;
+	// for (int i = 0; i < n; i++)
+	// {
+	// 	for (int j = 1; j <= x; j++)
+	// 		chmax(dp[j], dp[max(0, j - h[i])] + s[i]);
+	// }
+
+	FOR(n)
+	{
+		for (int j = x; j >= h[i]; j--)
+			chmax(dp[j], dp[max(0, j - h[i])] + s[i]);
+	}
+	cout << dp[x];
 }

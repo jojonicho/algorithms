@@ -47,19 +47,24 @@ inline void chmax(A &a, B b)
 		a = b;
 }
 
-ll help(ll h)
-{
-	if (!h)
-		return 0;
-	if (h == 1)
-		return 1;
-	return 2 * help(h / 2) + 1;
-}
+const int M = 1e9 + 7;
 
 int main()
 {
 	fast;
-	ll h;
-	cin >> h;
-	cout << help(h);
+	int n, x;
+	cin >> n >> x;
+	vi dp(x + 1), coins(n);
+	dp[0] = 1;
+	FOR(n)
+	cin >> coins[i];
+	for (int i = 1; i <= x; i++)
+	{
+		for (auto c : coins)
+		{
+			if (c <= i)
+				dp[i] = (dp[i] + dp[i - c]) % M;
+		}
+	}
+	cout << dp[x];
 }

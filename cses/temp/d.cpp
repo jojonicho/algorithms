@@ -47,19 +47,9 @@ inline void chmax(A &a, B b)
 		a = b;
 }
 
-ll help(ll h)
-{
-	if (!h)
-		return 0;
-	if (h == 1)
-		return 1;
-	return 2 * help(h / 2) + 1;
-}
-
 int main()
 {
 	fast;
-	ll h;
-	cin >> h;
-	cout << help(h);
+	int n;
+	cin >> n;
 }

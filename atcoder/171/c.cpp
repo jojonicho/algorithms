@@ -67,11 +67,10 @@ int main()
 		int cur = n % 26;
 		if (cur == 0)
 			cur = 26;
-		a += (char(cur + 96));
+		a = (char(cur + 96)) + a;
 		n -= cur;
 		n /= 26;
 	}
-	a += char(n + 96);
-	reverse(a.begin(), a.end());
+	a = char(n + 96) + a;
 	cout << a << en;
 }
