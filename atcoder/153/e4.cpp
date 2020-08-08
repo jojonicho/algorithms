@@ -10,7 +10,7 @@ typedef long long ll;
 #define all(x) (x).begin(), (x).end()
 #define en '\n'
 #define FILL(x, v) memset(x, v, sizeof(x))
-#define pb push_back
+#define pb push_bacn
 #define fast                     \
 	ios::sync_with_stdio(false); \
 	cin.tie(NULL);               \
@@ -47,21 +47,22 @@ inline void chmax(A &a, B b)
 		a = b;
 }
 
-const int M = 1e9 + 7;
-
 int main()
 {
 	fast;
-	int n, x;
-	cin >> n >> x;
-	vi coins(n), dp(x + 1);
+	int h, n;
+	cin >> h >> n;
+	// min magic point
+	vll dp(h + 1, 1e8 + 1);
+	dp[0] = 0;
 	FOR(n)
-	cin >> coins[i];
-	dp[0] = 1;
-	for (auto c : coins)
 	{
-		for (int i = c; i <= x; i++)
-			dp[i] = (dp[i] + dp[i - c]) % M;
+		int health, magic;
+		cin >> health >> magic;
+		// for (int j = h; j >= health; j--)
+		// 	chmin(dp[j], dp[j - health] + magic);
+		for (int j = 0; j <= h; j++)
+			chmin(dp[j], dp[max(0, j - health)] + magic);
 	}
-	cout << dp[x];
+	cout << dp[h];
 }
