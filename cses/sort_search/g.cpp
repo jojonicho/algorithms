@@ -79,12 +79,12 @@ int main()
 	{
 		int t;
 		cin >> t;
-		mp[x - t] = i + 1;
-		if (mp[t])
+		if (mp.find(t) != mp.end())
 		{
 			cout << i + 1 << " " << mp[t];
 			return 0;
 		}
+		mp[x - t] = i + 1;
 	}
 	cout << "IMPOSSIBLE";
 	return 0;

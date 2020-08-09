@@ -3,16 +3,23 @@ a = ["a", "b", "d"]
 # a = ["c", "f", "j"]
 x = input()
 
-lo = 0
-hi = len(a) - 1
 
-while lo <= hi:
-    mid = lo + (hi - lo) // 2
-    if a[mid] <= x:
-        lo = mid + 1
+def find(a, x):
+    lo = 0
+    hi = len(a) - 1
+
+    while lo <= hi:
+        mid = lo + (hi - lo) // 2
+        if a[mid] <= x:
+            lo = mid + 1
+        else:
+            hi = mid - 1
+    if lo >= len(a):
+        return a[0]
     else:
-        hi = mid - 1
-if lo >= len(a):
-    print(a[0])
-else:
-    print(a[lo])
+        return a[lo]
+
+
+if __name__ == "__main__":
+    print(find(a, x))
+
