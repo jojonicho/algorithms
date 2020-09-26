@@ -47,47 +47,27 @@ inline void chmax(A &a, B b)
 		a = b;
 }
 
-const int mod = 1e9 + 7;
-
-ll pw(ll b, ll e)
+void solve()
 {
-	ll res = 1;
-	while (e)
-	{
-		if (e % 2)
-			res = (res * b) % mod;
-		b = (b * b) % mod;
-		e >>= 1; // e/=2;
-	}
-	return res;
+	unsigned long long x, y;
+	cin >> x >> y;
+	unsigned long long tot = x + y;
+	if (x * 2 > tot)
+		cout << "Tere" << en;
+	else if (y * 2 > tot)
+		cout << "Toni" << en;
+	else
+		cout << "Voting Ulang" << en;
+	return;
 }
 
 int main()
 {
 	fast;
-	int n;
-	cin >> n;
-	vector<pair<int, int>> v(n);
-	auto cmp = [](pair<int, int> &a, pair<int, int> &b) {
-		return a.second < b.second;
-	};
-	FOR(n)
+	int t;
+	cin >> t;
+	while (t--)
 	{
-		int a, b;
-		cin >> a >> b;
-		v[i] = {a, b};
+		solve();
 	}
-	sort(all(v), cmp);
-	pair<int, int> cur = v[0];
-	int ans = 1;
-	for (int i = 1; i < n; i++)
-	{
-		if (v[i].first >= cur.second)
-		{
-			cur = v[i];
-			ans++;
-		}
-	}
-	cout << ans;
-	return 0;
 }

@@ -47,7 +47,8 @@ inline void chmax(A &a, B b)
 		a = b;
 }
 
-const int mod = 1e9 + 7;
+const int mxn = 5e5;
+const int M = 1e9 + 7;
 
 ll pw(ll b, ll e)
 {
@@ -55,39 +56,23 @@ ll pw(ll b, ll e)
 	while (e)
 	{
 		if (e % 2)
-			res = (res * b) % mod;
-		b = (b * b) % mod;
+			res = (res * b) % M;
+		b = (b * b) % M;
 		e >>= 1; // e/=2;
 	}
 	return res;
 }
 
+ll iv[mxn + 1], f1[mxn + 1], f2[mxn + 1];
+ll nck(int n, int k)
+{
+	return f1[n] * f2[k] % M * f2[n - k] % M;
+}
+
 int main()
 {
 	fast;
-	int n;
-	cin >> n;
-	vector<pair<int, int>> v(n);
-	auto cmp = [](pair<int, int> &a, pair<int, int> &b) {
-		return a.second < b.second;
-	};
-	FOR(n)
-	{
-		int a, b;
-		cin >> a >> b;
-		v[i] = {a, b};
-	}
-	sort(all(v), cmp);
-	pair<int, int> cur = v[0];
-	int ans = 1;
-	for (int i = 1; i < n; i++)
-	{
-		if (v[i].first >= cur.second)
-		{
-			cur = v[i];
-			ans++;
-		}
-	}
-	cout << ans;
-	return 0;
+	int n, x, t;
+	cin >> n >> x >> t;
+	cout << (int)ceil((double)n / x) * t;
 }

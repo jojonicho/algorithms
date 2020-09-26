@@ -47,47 +47,66 @@ inline void chmax(A &a, B b)
 		a = b;
 }
 
-const int mod = 1e9 + 7;
-
-ll pw(ll b, ll e)
-{
-	ll res = 1;
-	while (e)
-	{
-		if (e % 2)
-			res = (res * b) % mod;
-		b = (b * b) % mod;
-		e >>= 1; // e/=2;
-	}
-	return res;
-}
-
 int main()
 {
 	fast;
-	int n;
-	cin >> n;
-	vector<pair<int, int>> v(n);
-	auto cmp = [](pair<int, int> &a, pair<int, int> &b) {
-		return a.second < b.second;
-	};
-	FOR(n)
+	int h, w;
+	cin >> h >> w;
+	int ch, cw;
+	cin >> ch >> cw;
+	int dh, dw;
+	cin >> dh >> dw;
+	char s[h][w];
+	// vector<vector<char>> s;
+	FOR(h)
 	{
-		int a, b;
-		cin >> a >> b;
-		v[i] = {a, b};
-	}
-	sort(all(v), cmp);
-	pair<int, int> cur = v[0];
-	int ans = 1;
-	for (int i = 1; i < n; i++)
-	{
-		if (v[i].first >= cur.second)
+		FOR(j, w)
 		{
-			cur = v[i];
-			ans++;
+			char c;
+			cin >> c;
+			s[i][j] = c;
 		}
 	}
-	cout << ans;
-	return 0;
+	int ans = 0;
+	while (ch != dh && cw != dw)
+	{
+		while (ch < dh && s[ch + 1] != "#")
+			ch++;
+		while (ch > dh && s[ch - 1] != "#")
+			ch--;
+		while (cw < dw && s[cw + 1] != "#")
+			cw++;
+		while (cw > dw && s[cw - 1] != "#")
+			cw--;
+		if (ch < dh)
+		{ // up
+			for (int i = ch; i < ch + 3 && i < h; i++)
+			{
+				if (cw < dw)
+				{ // right
+					for (int j = cw + 1; j < w && j < cw + 3; j++)
+					{
+						// if
+					}
+				}
+				else
+				{ // left
+					for (int j = cw - 1; j >= 0 && j > cw - 3; j--)
+					{
+					}
+				}
+			}
+		}
+		else
+		{ // ch > dh down
+			if (cw < dw)
+			{ // right
+			}
+			else
+			{ // left
+			}
+		}
+		// for(int i=)
+	}
+	cout << ans << en;
 }

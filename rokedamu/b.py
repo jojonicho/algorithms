@@ -1,10 +1,13 @@
 # n = int(input())
 # for
-n = 3
+
 # x = [5, 6, 9]
 # h = [2, 2, 1]
-x = [1, 2, 6]
-h = [5, 3, 1]
+# x = [0, 1, 2, 6]
+# h = [1, 5, 3, 1]
+x = [1, 3, 5]
+h = [5, 1, 1]
+n = len(x)
 
 
 def find_falling_trees(x, h):
@@ -21,6 +24,7 @@ def find_falling_trees(x, h):
         while st and curpos >= st[-1][0]:
             curpos = max(curpos, st.pop()[1])
         st.append([x[i], curpos])
+        print(i, st)
         ans[i] = curpos
     return ans
 

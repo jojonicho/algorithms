@@ -62,32 +62,33 @@ ll pw(ll b, ll e)
 	return res;
 }
 
+void solve()
+{
+	long long n, m;
+	cin >> n >> m;
+	if (5 * m < n)
+	{
+		cout << "-1 -1" << en;
+		return;
+	}
+	long long ansMin = (4 * m < n) ? n - 4 * m : 0;
+	n -= m;
+	long long ansMax = n / 4;
+	// while (n >= 4)
+	// {
+	// 	n -= 4;
+	// 	ansMax++;
+	// }
+	cout << ansMin << " " << ansMax << en;
+}
+
 int main()
 {
 	fast;
-	int n;
-	cin >> n;
-	vector<pair<int, int>> v(n);
-	auto cmp = [](pair<int, int> &a, pair<int, int> &b) {
-		return a.second < b.second;
-	};
-	FOR(n)
+	int t = 1;
+	while (t--)
 	{
-		int a, b;
-		cin >> a >> b;
-		v[i] = {a, b};
+		solve();
 	}
-	sort(all(v), cmp);
-	pair<int, int> cur = v[0];
-	int ans = 1;
-	for (int i = 1; i < n; i++)
-	{
-		if (v[i].first >= cur.second)
-		{
-			cur = v[i];
-			ans++;
-		}
-	}
-	cout << ans;
 	return 0;
 }

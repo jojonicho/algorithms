@@ -61,7 +61,7 @@ int main()
 	fast;
 	int n, m;
 	cin >> n >> m;
-	set<array<int, 2>> s;
+	set<pair<int, int>> s;
 	forn
 	{
 		int t;
@@ -72,13 +72,15 @@ int main()
 	{
 		int t;
 		cin >> t;
-		auto it = s.lower_bound({t, i + 1});
+		auto it = s.lower_bound({t + 1, 0});
 		if (it == s.begin())
-			cout << "-1" << en;
+		{
+			cout << -1 << en;
+		}
 		else
 		{
 			--it;
-			cout << (*it)[0] << en;
+			cout << (*it).first << en;
 			s.erase(it);
 		}
 	}

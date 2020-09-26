@@ -62,32 +62,20 @@ ll pw(ll b, ll e)
 	return res;
 }
 
+void solve()
+{
+	int n;
+	cin >> n;
+}
+
 int main()
 {
 	fast;
-	int n;
-	cin >> n;
-	vector<pair<int, int>> v(n);
-	auto cmp = [](pair<int, int> &a, pair<int, int> &b) {
-		return a.second < b.second;
-	};
-	FOR(n)
+	int t;
+	cin >> t;
+	while (t--)
 	{
-		int a, b;
-		cin >> a >> b;
-		v[i] = {a, b};
+		solve();
 	}
-	sort(all(v), cmp);
-	pair<int, int> cur = v[0];
-	int ans = 1;
-	for (int i = 1; i < n; i++)
-	{
-		if (v[i].first >= cur.second)
-		{
-			cur = v[i];
-			ans++;
-		}
-	}
-	cout << ans;
 	return 0;
 }

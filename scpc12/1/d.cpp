@@ -47,47 +47,78 @@ inline void chmax(A &a, B b)
 		a = b;
 }
 
-const int mod = 1e9 + 7;
-
-ll pw(ll b, ll e)
+void solve()
 {
-	ll res = 1;
-	while (e)
+	int n, k;
+	cin >> n >> k;
+	int mn = 0, mx = 1e9 + 1;
+	// priority_queue<int, vi, greater<int>> minq;
+	// priority_queue<int> maxq;
+	map<int, int> mp;
+	vi a(n);
+	FOR(n)
 	{
-		if (e % 2)
-			res = (res * b) % mod;
-		b = (b * b) % mod;
-		e >>= 1; // e/=2;
+		int c;
+		cin >> c;
+		a[i] = c;
+		mp[c]++;
+	};
+	// sort(all(a));
+	// int mn=a[0], mx=a[n-1];
+	int num = mp.size();
+	vi pre(num);
+	int i = 0, cur = 0;
+	for (auto c : mp)
+	{
+		// cur += c.second;
+		// pre[i] += cur;
+		// i++;
+		pre[i++] = c.second;
 	}
-	return res;
+	for (int sd : pre)
+	{
+		cout << sd << " ";
+	}
+	cout << en;
+	// FOR(n){
+	// 	int c;
+	// 	cin >> c;
+	// mp[c]++;
+	// chmin(mn, c);
+	// chmax(mx, c);
+	// minq.push(c);
+	// maxq.push(c);
+	// }
+	// FOR(n)
+	// {
+	// 	int c = a[i];
+	// 	mp[c]++;
+	// 	if (mp[c] <= k)
+	// 	// if(mp[c])
+	// }
+	// int i = 0, j = n - 1;
+	// while (i != j)
+	// {
+	// 	int c = 0, d = 0;
+	// 	int i2 = i, j2 = j;
+	// 	if (mp[a[i]] <= k)
+	// 	{
+	// 		i2 += mp[a[i]];
+	// 	}
+	// 	if (mp[a[j]] <= k)
+	// 	{
+	// 		i2 += mp[a[i]];
+	// 	}
+	// }
 }
 
 int main()
 {
 	fast;
-	int n;
-	cin >> n;
-	vector<pair<int, int>> v(n);
-	auto cmp = [](pair<int, int> &a, pair<int, int> &b) {
-		return a.second < b.second;
-	};
-	FOR(n)
+	int t;
+	cin >> t;
+	while (t--)
 	{
-		int a, b;
-		cin >> a >> b;
-		v[i] = {a, b};
+		solve();
 	}
-	sort(all(v), cmp);
-	pair<int, int> cur = v[0];
-	int ans = 1;
-	for (int i = 1; i < n; i++)
-	{
-		if (v[i].first >= cur.second)
-		{
-			cur = v[i];
-			ans++;
-		}
-	}
-	cout << ans;
-	return 0;
 }

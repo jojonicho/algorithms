@@ -47,47 +47,43 @@ inline void chmax(A &a, B b)
 		a = b;
 }
 
-const int mod = 1e9 + 7;
-
-ll pw(ll b, ll e)
-{
-	ll res = 1;
-	while (e)
-	{
-		if (e % 2)
-			res = (res * b) % mod;
-		b = (b * b) % mod;
-		e >>= 1; // e/=2;
-	}
-	return res;
-}
-
 int main()
 {
 	fast;
 	int n;
+	int ans = 0;
+	map<int, set<int>> mp;
 	cin >> n;
-	vector<pair<int, int>> v(n);
-	auto cmp = [](pair<int, int> &a, pair<int, int> &b) {
-		return a.second < b.second;
-	};
-	FOR(n)
+	for (ll k = n - 1; k >= 1; k--)
 	{
-		int a, b;
-		cin >> a >> b;
-		v[i] = {a, b};
-	}
-	sort(all(v), cmp);
-	pair<int, int> cur = v[0];
-	int ans = 1;
-	for (int i = 1; i < n; i++)
-	{
-		if (v[i].first >= cur.second)
+		for (ll i = 1; i * i < k; i++)
 		{
-			cur = v[i];
-			ans++;
+			if (k % i == 0)
+				ans++;
+			// for (ll j = 1; i * j < k; j++)
+			// {
+			// 	// if (i * j == k)
+			// 	ans++;
+			// 	// for (ll k = 1; i * j + k <= n; k++)
+			// 	// {
+			// 	// 	// cout << i << " " << j << " " << k << en;
+			// 	// 	if (i * j + k == n)
+			// 	// 		ans++;
+			// 	// }
+			// }
 		}
 	}
+	// for(ll i=n-1; n>=0;)
+
+	// for (int i = 1; i <= n; i++)
+	// {
+	// 	for (int j = 1; i + j <= n; j++)
+	// 	{
+	// 		if (i + j == n)
+	// 		{
+	// 			ans += 2;
+	// 		}
+	// 	}
+	// }
 	cout << ans;
-	return 0;
 }

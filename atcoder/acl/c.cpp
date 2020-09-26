@@ -47,47 +47,71 @@ inline void chmax(A &a, B b)
 		a = b;
 }
 
-const int mod = 1e9 + 7;
-
-ll pw(ll b, ll e)
+struct UnionFind
 {
-	ll res = 1;
-	while (e)
+	vector<int> d;
+	UnionFind(int n = 0) : d(n, -1) {}
+
+	int find(int x)
 	{
-		if (e % 2)
-			res = (res * b) % mod;
-		b = (b * b) % mod;
-		e >>= 1; // e/=2;
+		// not visited or parent
+		if (d[x] < 0)
+			return x;
+		return d[x] = find(d[x]); // dont really need to assign again
 	}
-	return res;
-}
+
+	bool unite(int x, int y)
+	{
+		x = find(x);
+		y = find(y);
+		if (x == y)
+			return false;
+		if (x > y)
+			swap(x, y);
+		if (d[x] > d[y])
+			swap(x, y);
+		d[x] += d[y];
+		d[y] = x;
+
+		return true;
+	}
+
+	bool same(int x, int y) { return find(x) == find(y); }
+
+	int size(int x) { return -d[find(x)]; }
+};
 
 int main()
 {
 	fast;
-	int n;
-	cin >> n;
-	vector<pair<int, int>> v(n);
-	auto cmp = [](pair<int, int> &a, pair<int, int> &b) {
-		return a.second < b.second;
-	};
+	int n, m;
+	cin >> n >> m;
+	UnionFind uf(n);
+	vvi adj(n);
+	int c, ans = 0;
+	FOR(m)
+	{
+		int x, y;
+		cin >> x >> y;
+		x--;
+		y--;
+		if (!i)
+		{
+			c = x;
+		}
+		adj[x].pb(y);
+		adj[y].pb(x);
+		uf.unite(x, y);
+	}
 	FOR(n)
 	{
-		int a, b;
-		cin >> a >> b;
-		v[i] = {a, b};
-	}
-	sort(all(v), cmp);
-	pair<int, int> cur = v[0];
-	int ans = 1;
-	for (int i = 1; i < n; i++)
-	{
-		if (v[i].first >= cur.second)
+		if (uf.size(c) == n)
+			break;
+		if (!uf.same(c, i))
 		{
-			cur = v[i];
+			uf.unite(c, i);
 			ans++;
 		}
 	}
-	cout << ans;
-	return 0;
+	cout << ans << en;
 }

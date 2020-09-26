@@ -46,48 +46,23 @@ inline void chmax(A &a, B b)
 	if (a < b)
 		a = b;
 }
-
-const int mod = 1e9 + 7;
-
-ll pw(ll b, ll e)
-{
-	ll res = 1;
-	while (e)
-	{
-		if (e % 2)
-			res = (res * b) % mod;
-		b = (b * b) % mod;
-		e >>= 1; // e/=2;
-	}
-	return res;
-}
+const int M = 1e9 + 7;
 
 int main()
 {
 	fast;
-	int n;
+	ll n;
 	cin >> n;
-	vector<pair<int, int>> v(n);
-	auto cmp = [](pair<int, int> &a, pair<int, int> &b) {
-		return a.second < b.second;
-	};
+	ll sum = 0, ans = 0;
 	FOR(n)
 	{
-		int a, b;
-		cin >> a >> b;
-		v[i] = {a, b};
-	}
-	sort(all(v), cmp);
-	pair<int, int> cur = v[0];
-	int ans = 1;
-	for (int i = 1; i < n; i++)
-	{
-		if (v[i].first >= cur.second)
+		int t;
+		cin >> t;
+		if (i)
 		{
-			cur = v[i];
-			ans++;
+			ans = (ans + ((sum * t) % M)) % M;
 		}
+		sum = (sum + t) % M;
 	}
 	cout << ans;
-	return 0;
 }
