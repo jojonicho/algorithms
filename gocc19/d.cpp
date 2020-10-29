@@ -46,26 +46,10 @@ inline void chmax(A &a, B b)
 	if (a < b)
 		a = b;
 }
-const int M = 1e9 + 7;
 
 int main()
 {
 	fast;
 	int n;
-	ll sum = 0, ans = 0;
 	cin >> n;
-	vi a(n);
-	FOR(n)
-	{
-		cin >> a[i];
-		sum = (sum + a[i]) % M;
-	}
-	FOR(n)
-	{
-		sum -= a[i];
-		if (sum < 0)
-			sum += M;
-		ans = (ans + (sum * a[i]) % M) % M;
-	}
-	cout << ans << en;
 }
