@@ -7,7 +7,9 @@ x = input()
 def find(a, x):
     lo = 0
     hi = len(a) - 1
+    # lo <= x <= hi
     while lo <= hi:
+    # while lo < hi -> lo <= x < hi
         mid = lo + (hi - lo) // 2
         # <= because were finding upper bound
         if a[mid] <= x:

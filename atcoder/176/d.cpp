@@ -52,61 +52,53 @@ int main()
 	fast;
 	int h, w;
 	cin >> h >> w;
-	int ch, cw;
+	int ch, cw; // current
 	cin >> ch >> cw;
-	int dh, dw;
+	int dh, dw; // destination
 	cin >> dh >> dw;
-	char s[h][w];
-	// vector<vector<char>> s;
+
+	string s[h];
 	FOR(h)
 	{
-		FOR(j, w)
-		{
-			char c;
-			cin >> c;
-			s[i][j] = c;
-		}
+		cin >> s[i];
 	}
-	int ans = 0;
-	while (ch != dh && cw != dw)
+	// 01 bfs -> dequeue
+	deque<tuple<int, int, int>> dq;
+	vvi dist(h, vector<int>(w, -1)); // -1 for unvisited, dist >=0 means already relaxed
+	dq.emplace_front(ch - 1, cw - 1, 0);
+
+	while (!dq.empty())
 	{
-		while (ch < dh && s[ch + 1] != "#")
-			ch++;
-		while (ch > dh && s[ch - 1] != "#")
-			ch--;
-		while (cw < dw && s[cw + 1] != "#")
-			cw++;
-		while (cw > dw && s[cw - 1] != "#")
-			cw--;
-		if (ch < dh)
-		{ // up
-			for (int i = ch; i < ch + 3 && i < h; i++)
+		int x, y, z;
+		tie(x, y, z) = dq.front();
+		dq.pop_front();
+
+		if (x < 0 || x >= h || y < 0 || y >= w || dist[x][y] >= 0 || s[x][y] == '#')
+			continue;
+
+		dist[x][y] = z;
+
+		for (int i = -2; i <= 2; i++)
+		{
+			for (int j = -2; j <= 2; j++)
 			{
-				if (cw < dw)
-				{ // right
-					for (int j = cw + 1; j < w && j < cw + 3; j++)
-					{
-						// if
-					}
+				if (!i && !j)
+					continue;
+				if (i * i + j * j == 1) // adjacent to maximum 1 distance
+				{
+					dq.emplace_front(x + i, y + j, z);
 				}
+				// else if (i * i + j * j > 1)
 				else
-				{ // left
-					for (int j = cw - 1; j >= 0 && j > cw - 3; j--)
-					{
-					}
+				{
+					/*
+				[x][j]
+				[i][cur] -> (-1)^2 + 1^2 == 2, more than 1 step
+				*/
+					dq.emplace_back(x + i, y + j, z + 1);
 				}
 			}
 		}
-		else
-		{ // ch > dh down
-			if (cw < dw)
-			{ // right
-			}
-			else
-			{ // left
-			}
-		}
-		// for(int i=)
 	}
-	cout << ans << en;
+	cout << dist[dh - 1][dw - 1] << en;
 }
