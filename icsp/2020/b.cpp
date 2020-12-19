@@ -47,10 +47,20 @@ inline void chmax(A &a, B b)
 		a = b;
 }
 
+const ll M = 1e9 + 7;
 int main()
 {
 	fast;
-	int r1, c1, r2, c2;
-	cin >> r1 >> c1 >> r2 >> c2;
-	// int x = abs(r2-r1)/
+	string s;
+	cin >> s;
+	ll n, power = 1L, ans = 0;
+	cin >> n;
+	FOR(n)
+	{
+		ll a, b;
+		cin >> a >> b;
+		ans = (ans + (a - b) * (ll)pow(13L, power)) % M;
+		power++;
+	}
+	cout << (ans < M ? (ans < 0 ? ans + M : ans) : ans % M) << en;
 }

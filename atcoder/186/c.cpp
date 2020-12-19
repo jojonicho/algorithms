@@ -47,10 +47,33 @@ inline void chmax(A &a, B b)
 		a = b;
 }
 
+bool oct(int x)
+{
+	while (x > 0 && (x % 8 != 7))
+	{
+		x /= 8;
+	}
+	return (x > 0 && x % 8 == 7);
+}
+
+bool dec(int x)
+{
+	while (x > 0 && (x % 10 != 7))
+	{
+		x /= 10;
+	}
+	return (x > 0 && x % 10 == 7);
+}
+
 int main()
 {
 	fast;
-	int r1, c1, r2, c2;
-	cin >> r1 >> c1 >> r2 >> c2;
-	// int x = abs(r2-r1)/
+	int n;
+	cin >> n;
+	ll ans = n;
+	for (int i = 1; i <= n; i++)
+	{
+		ans -= (dec(i) || oct(i));
+	}
+	cout << ans << en;
 }

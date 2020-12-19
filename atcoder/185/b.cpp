@@ -50,7 +50,34 @@ inline void chmax(A &a, B b)
 int main()
 {
 	fast;
-	int r1, c1, r2, c2;
-	cin >> r1 >> c1 >> r2 >> c2;
-	// int x = abs(r2-r1)/
+	int n, m, t;
+	cin >> n >> m >> t;
+	// vi a(t, -1);
+	bool ok = 1;
+	int prev = 0, cur = n;
+	FOR(m)
+	{
+		int c, d;
+		cin >> c >> d;
+		// c--;
+		// d--;
+		// cout << c - prev << en;
+		cur -= (c - prev);
+		if (cur <= 0)
+		{
+			ok = false;
+			// cout << "No" << en;
+			// return 0;
+		}
+		cur += (d - c);
+		chmin(cur, n);
+		// cout << "cur : " << cur << en;
+		prev = d;
+	}
+	cur -= (t - prev);
+	if (cur <= 0)
+	{
+		ok = 0;
+	}
+	cout << (ok ? "Yes" : "No") << en;
 }

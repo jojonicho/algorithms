@@ -46,11 +46,66 @@ inline void chmax(A &a, B b)
 	if (a < b)
 		a = b;
 }
+const int mxn = (2 << 64);
+const int M = 1e9 + 7;
+
+ll pw(ll b, ll e)
+{
+	ll res = 1;
+	while (e)
+	{
+		if (e % 2)
+			res = (res * b) % M;
+		b = (b * b) % M;
+		e >>= 1; // e/=2;
+	}
+	return res;
+}
+
+ll iv[mxn + 1], f1[mxn + 1], f2[mxn + 1];
+ll nck(int n, int k)
+{
+	return f1[n] * f2[k] % M * f2[n - k] % M;
+}
 
 int main()
 {
 	fast;
-	int r1, c1, r2, c2;
-	cin >> r1 >> c1 >> r2 >> c2;
-	// int x = abs(r2-r1)/
+	int n;
+	cin >> n;
+	iv[1] = 1;
+	for (int i = 2; i < mxn; ++i)
+		iv[i] = mxn - (mxn / i) * iv[mxn % i] % mxn;
+	// int k = n % 12;
+	cout << nck(n, 12) << en;
+
+	// ll ans = 1;
+	// while (k--)
+	// {
+	// 	ans *= 12;
+	// }
+	// cout << ans;
+
+	// vi a(n+1);
+	// for(int i=1; i<= n; i++) {
+
+	// }
+	// cout << a[n] << en;
+
+	// cout << pow(12, (n % 12));
+	// cout << 12 * k << en;
+
+	// while (n -= 12 > 1)
+	// {
+	// 	if (ans == 0)
+	// 	{
+	// 		ans = 1;
+	// 	}
+	// 	else
+	// 	{
+	// 		ans *= 12;
+	// 	}
+	// 	cout << n << en;
+	// }
+	// cout << ans;
 }

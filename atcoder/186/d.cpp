@@ -50,7 +50,19 @@ inline void chmax(A &a, B b)
 int main()
 {
 	fast;
-	int r1, c1, r2, c2;
-	cin >> r1 >> c1 >> r2 >> c2;
-	// int x = abs(r2-r1)/
+	int n;
+	cin >> n;
+	vll a(n);
+	FOR(n)
+	{
+		cin >> a[i];
+	}
+	ll ans = 0;
+	sort(all(a));
+	for (int i = 0; i < n; i++)
+	{
+		ans -= a[i] * (n - 1 - i);
+		ans += i * a[i];
+	}
+	cout << ans << en;
 }

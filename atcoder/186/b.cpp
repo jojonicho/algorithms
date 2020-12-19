@@ -50,7 +50,25 @@ inline void chmax(A &a, B b)
 int main()
 {
 	fast;
-	int r1, c1, r2, c2;
-	cin >> r1 >> c1 >> r2 >> c2;
-	// int x = abs(r2-r1)/
+	int h, w;
+	cin >> h >> w;
+	int mn = 101;
+	int a[h][w];
+	FOR(h)
+	{
+		FOR(j, w)
+		{
+			cin >> a[i][j];
+			chmin(mn, a[i][j]);
+		}
+	}
+	int ans = 0;
+	FOR(h)
+	{
+		FOR(j, w)
+		{
+			ans += abs(mn - a[i][j]);
+		}
+	}
+	cout << ans << en;
 }

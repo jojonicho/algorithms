@@ -56,7 +56,7 @@ void mitm(ll a[], int c, int n)
 		ll cur = 0;
 		FOR(j, n)
 		{
-			if (i & (1 << j - 1))
+			if (i & (1 << j))
 			{
 				cur += arr[j + c];
 			}

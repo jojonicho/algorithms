@@ -11,7 +11,7 @@ typedef long long ll;
 #define en '\n'
 #define FILL(x, v) memset(x, v, sizeof(x))
 #define pb push_back
-#define fast                   \
+#define fast                     \
 	ios::sync_with_stdio(false); \
 	cin.tie(NULL);               \
 	cout.tie(NULL);
@@ -22,7 +22,7 @@ typedef long long ll;
 #define F_OR4(i, b, e, s) F_OR(i, b, e, s)
 #define GET5(a, b, c, d, e, ...) e
 #define F_ORC(...) GET5(__VA_ARGS__, F_OR4, F_OR3, F_OR2, F_OR1)
-#define FOR(...)     \
+#define FOR(...)       \
 	F_ORC(__VA_ARGS__) \
 	(__VA_ARGS__)
 
@@ -30,7 +30,7 @@ typedef long long ll;
 #define E_ACH3(x, y, a) for (auto &[x, y] : a)
 #define E_ACH4(x, y, z, a) for (auto &[x, y, z] : a)
 #define E_ACHC(...) GET5(__VA_ARGS__, E_ACH4, E_ACH3, E_ACH2)
-#define EACH(...)     \
+#define EACH(...)       \
 	E_ACHC(__VA_ARGS__) \
 	(__VA_ARGS__)
 
@@ -47,10 +47,31 @@ inline void chmax(A &a, B b)
 		a = b;
 }
 
+const int mxn = 5e5;
+const int M = 1e9 + 7;
+
+ll pw(ll b, ll e)
+{
+	ll res = 1;
+	while (e)
+	{
+		if (e % 2)
+			res = (res * b) % M;
+		b = (b * b) % M;
+		e >>= 1; // e/=2;
+	}
+	return res;
+}
+
+ll iv[mxn + 1], f1[mxn + 1], f2[mxn + 1];
+ll nck(int n, int k)
+{
+	return f1[n] * f2[k] % M * f2[n - k] % M;
+}
+
 int main()
 {
 	fast;
-	int r1, c1, r2, c2;
-	cin >> r1 >> c1 >> r2 >> c2;
-	// int x = abs(r2-r1)/
+	int n;
+	cin >> n;
 }

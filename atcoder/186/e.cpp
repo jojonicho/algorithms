@@ -47,10 +47,43 @@ inline void chmax(A &a, B b)
 		a = b;
 }
 
+void solve()
+{
+	ll n, s, k, ans = 0;
+	cin >> n >> s >> k;
+	// if ((n - s) % k == 0)
+	// {
+	// 	cout << (n - s) / k << en;
+	// 	return;
+	// }
+	// while (n)
+	// {
+	// 	int diff = n % k;
+	// 	if ((n + s) % k == 0)
+	// 	{
+	// 		cout << " bob " << en;
+	// 		return;
+	// 	}
+	// 	if (diff == 0)
+	// 	{
+	// 		cout << -1 << en;
+	// 		return;
+	// 	}
+	// 	diff = k - diff;
+	// 	n += diff;
+	// }
+	// // cout << "diff: " << diff << en;
+	// // cout << (1 + n / k) * (s / diff) << en;
+	// // cout << -1 << en;
+}
+
 int main()
 {
 	fast;
-	int r1, c1, r2, c2;
-	cin >> r1 >> c1 >> r2 >> c2;
-	// int x = abs(r2-r1)/
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		solve();
+	}
 }
