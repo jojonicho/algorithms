@@ -7,6 +7,7 @@ typedef long long ll;
 #define vi vector<int>
 #define vvi vector<vector<int>>
 #define vll vector<long long>
+#define vvll vector<vector<long long>>
 #define all(x) (x).begin(), (x).end()
 #define en '\n'
 #define FILL(x, v) memset(x, v, sizeof(x))
@@ -46,20 +47,32 @@ inline void chmax(A &a, B b)
 	if (a < b)
 		a = b;
 }
+const int M = 1e9 + 7;
 
 int main()
 {
 	fast;
-	int n, sum1 = 0, sum2 = 0;
+	ll n;
 	cin >> n;
-	vi va(n), vb(n);
-	FOR(n)
+	ll sum = n * (n + 1) / 2;
+	if (sum & 1)
 	{
-		int a, b;
-		cin >> a >> b;
-		va[i] = a;
-		vb[i] = b;
-		sum1 += a;
-		sum2 += b;
+		cout << 0;
+		return 0;
 	}
+	sum /= 2;
+	vvi dp(n + 1, vi(sum + 1));
+	dp[0][0] = 1;
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= sum; j++)
+		{
+			dp[i][j] = dp[i - 1][j]; // not taking
+			if (j >= i)
+			{
+				dp[i][j] = (dp[i][j] + dp[i - 1][j - i]) % M;
+			}
+		}
+	}
+	cout << dp[n][sum];
 }

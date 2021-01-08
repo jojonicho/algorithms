@@ -50,16 +50,23 @@ inline void chmax(A &a, B b)
 int main()
 {
 	fast;
-	int n, sum1 = 0, sum2 = 0;
+	int n;
 	cin >> n;
-	vi va(n), vb(n);
+	vi dp;
 	FOR(n)
 	{
-		int a, b;
-		cin >> a >> b;
-		va[i] = a;
-		vb[i] = b;
-		sum1 += a;
-		sum2 += b;
+		int x;
+		cin >> x;
+
+		auto c = lower_bound(dp.begin(), dp.end(), x);
+		if (c == dp.end())
+		{
+			dp.push_back(x);
+		}
+		else
+		{
+			*c = x;
+		}
 	}
+	cout << dp.size();
 }

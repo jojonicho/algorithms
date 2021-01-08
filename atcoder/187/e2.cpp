@@ -50,16 +50,67 @@ inline void chmax(A &a, B b)
 int main()
 {
 	fast;
-	int n, sum1 = 0, sum2 = 0;
+	int n, q;
 	cin >> n;
-	vi va(n), vb(n);
-	FOR(n)
+	vi va(n), vb(n), vc(n);
+	vvi adj(n, vector<int>());
+	vector<vector<vector<int>>> memo(n, vector<vector<int>>(n, vector<int>()));
+	FOR(n - 1)
 	{
 		int a, b;
 		cin >> a >> b;
+		a--;
+		b--;
 		va[i] = a;
 		vb[i] = b;
-		sum1 += a;
-		sum2 += b;
+		adj[a].pb(b);
+		adj[b].pb(a);
+	}
+	cin >> q;
+	FOR(q)
+	{
+		int t, e, x;
+		cin >> t >> e >> x;
+		e--;
+		t--;
+		int a = va[e], b = vb[e];
+		if (t)
+		{
+			b = va[e];
+			a = vb[e];
+		}
+		if (!memo[a][b].empty())
+		{
+			for (auto mem : memo[a][b])
+			{
+				vc[mem] += x;
+				cout << mem << en;
+			}
+			continue;
+		}
+		queue<int> q;
+		q.push(a);
+		vi vis(n);
+		while (!q.empty())
+		{
+			int u = q.front();
+			q.pop();
+			if (vis[u] || u == b)
+			{
+				continue;
+			}
+			memo[a][b].push_back(u);
+			vis[u] = 1;
+			vc[u] += x;
+			for (int v : adj[u])
+			{
+				q.push(v);
+			}
+		}
+	}
+
+	FOR(n)
+	{
+		cout << vc[i] << en;
 	}
 }

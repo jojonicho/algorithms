@@ -50,16 +50,18 @@ inline void chmax(A &a, B b)
 int main()
 {
 	fast;
-	int n, sum1 = 0, sum2 = 0;
+	int n;
 	cin >> n;
-	vi va(n), vb(n);
-	FOR(n)
+	vi dp(n + 1, 1e9);
+	dp[0] = 0;
+	for (int i = 1; i <= n; i++)
 	{
-		int a, b;
-		cin >> a >> b;
-		va[i] = a;
-		vb[i] = b;
-		sum1 += a;
-		sum2 += b;
+		int j = i;
+		while (j)
+		{
+			chmin(dp[i], dp[i - j % 10] + 1);
+			j /= 10;
+		}
 	}
+	cout << dp[n];
 }

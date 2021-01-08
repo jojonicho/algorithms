@@ -7,6 +7,7 @@ typedef long long ll;
 #define vi vector<int>
 #define vvi vector<vector<int>>
 #define vll vector<long long>
+#define vvll vector<vector<long long>>
 #define all(x) (x).begin(), (x).end()
 #define en '\n'
 #define FILL(x, v) memset(x, v, sizeof(x))
@@ -47,19 +48,44 @@ inline void chmax(A &a, B b)
 		a = b;
 }
 
+const int M = 1e9 + 7;
+
 int main()
 {
 	fast;
-	int n, sum1 = 0, sum2 = 0;
+	int n;
 	cin >> n;
-	vi va(n), vb(n);
+	string grid[n];
 	FOR(n)
 	{
-		int a, b;
-		cin >> a >> b;
-		va[i] = a;
-		vb[i] = b;
-		sum1 += a;
-		sum2 += b;
+		cin >> grid[i];
 	}
+	vvi dp(n, vi(n));
+	if (grid[0][0] == '*' || grid[n - 1][n - 1] == '*')
+	{
+		cout << 0;
+		return 0;
+	}
+	dp[0][0] = 1;
+	for (int i = 0; i < n && grid[i][0] != '*'; i++)
+		dp[i][0] = 1;
+	for (int i = 1; i < n && grid[0][i] != '*'; i++)
+		dp[0][i] = 1;
+	for (int i = 1; i < n; i++)
+	{
+		for (int j = 1; j < n; j++)
+		{
+			if (grid[i - 1][j] != '*')
+				dp[i][j] += dp[i - 1][j];
+			dp[i][j] %= M;
+			if (grid[i][j - 1] != '*')
+				dp[i][j] += dp[i][j - 1];
+			dp[i][j] %= M;
+			// if (grid[i - 1][j] != '*')
+			// 	dp[i][j] = (dp[i][j] + dp[i - 1][j]) % M;
+			// if (grid[i][j - 1] != '*')
+			// 	dp[i][j] += (dp[i][j] + dp[i][j - 1]) % M;
+		}
+	}
+	cout << dp[n - 1][n - 1];
 }

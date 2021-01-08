@@ -7,6 +7,7 @@ typedef long long ll;
 #define vi vector<int>
 #define vvi vector<vector<int>>
 #define vll vector<long long>
+#define vvll vector<vector<long long>>
 #define all(x) (x).begin(), (x).end()
 #define en '\n'
 #define FILL(x, v) memset(x, v, sizeof(x))
@@ -47,19 +48,28 @@ inline void chmax(A &a, B b)
 		a = b;
 }
 
+const int M = 1e9 + 7;
+
 int main()
 {
 	fast;
-	int n, sum1 = 0, sum2 = 0;
-	cin >> n;
-	vi va(n), vb(n);
+	int n, x;
+	cin >> n >> x;
+	vi h(n), s(n), dp(x + 1);
 	FOR(n)
 	{
-		int a, b;
-		cin >> a >> b;
-		va[i] = a;
-		vb[i] = b;
-		sum1 += a;
-		sum2 += b;
+		cin >> h[i];
 	}
+	FOR(n)
+	{
+		cin >> s[i];
+	}
+	FOR(n + 1)
+	{
+		for (int j = x; j >= h[i]; j--)
+		{
+			chmax(dp[j], dp[j - h[i]] + s[i]);
+		}
+	}
+	cout << dp[x];
 }
