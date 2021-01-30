@@ -51,6 +51,15 @@ void solve()
 {
 	int n;
 	cin >> n;
+	set<ll> st;
+	ll mn = 1e5 + 1;
+	FOR(n)
+	{
+		int x;
+		cin >> x;
+		st.insert(x);
+		chmin(mn, x);
+	}
 }
 int main()
 {

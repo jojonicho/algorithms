@@ -8,6 +8,7 @@ typedef long long ll;
 #define vvi vector<vector<int>>
 #define vll vector<long long>
 #define all(x) (x).begin(), (x).end()
+#define rall(x) (x).rbegin(), (x).rend()
 #define en '\n'
 #define FILL(x, v) memset(x, v, sizeof(x))
 #define pb push_back
@@ -47,42 +48,54 @@ inline void chmax(A &a, B b)
 		a = b;
 }
 
-const int M = 1e9 + 7;
 void solve()
 {
-	ll n, k;
-	cin >> n >> k;
-	priority_queue<int> pq;
-	vll nums(n);
+	int n, requiredMemory;
+	cin >> n >> requiredMemory;
+	int memory[n];
 	FOR(n)
+	{
+		cin >> memory[i];
+	}
+	vi conv1, conv2;
+
+	ll sum1 = 0, sum2 = 0, ans = INT_MAX;
+	for (auto &mem : memory)
 	{
 		int x;
 		cin >> x;
-		pq.push(x);
-		nums[i] = x;
-	}
-	ll target = 0;
-	ll ans = 0;
-	ll sum = 0;
-	FOR(k)
-	{
-		int cur = pq.top();
-		pq.pop();
-		target += cur;
-	}
-	cout << "target: " << target << en;
-	map<ll, ll> mp;
-	mp[0] = 1;
-	FOR(n)
-	{
-		sum = (sum + nums[i]) % M;
-		if (mp.count(sum - k))
+		if (x == 1)
 		{
-			ans = (ans + mp[sum - k]) % M;
+			conv1.pb(mem);
 		}
-		mp[sum]++;
+		else
+		{
+			conv2.pb(mem);
+			sum2 += mem;
+		}
 	}
-	cout << ans << en;
+
+	sort(rall(conv1));
+	sort(rall(conv2));
+
+	// greedily delete conv1 over conv2 applications
+	int r = conv2.size() - 1;
+	for (int l = 0; l <= conv1.size(); l++)
+	{
+		// delete less of conv2
+		while (r >= 0 && sum1 + sum2 - conv2[r] >= requiredMemory)
+		{
+			sum2 -= conv2[r--];
+		}
+		if (sum1 + sum2 >= requiredMemory)
+		{
+			chmin(ans, 2 * (r + 1) + l);
+		}
+		if (l == conv1.size())
+			break;
+		sum1 += conv1[l];
+	}
+	cout << (ans == INT_MAX ? -1 : ans) << en;
 }
 int main()
 {
