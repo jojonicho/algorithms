@@ -46,61 +46,54 @@ inline void chmax(A &a, B b)
 	if (a < b)
 		a = b;
 }
-const ll INF = 6e12 + 1;
-const int mxN = 3001;
-ll V[mxN][mxN];
-ll dp[mxN][mxN][4];
+
+const ll INF = 1e18;
 
 int main()
 {
 	fast;
-	int R, C, K;
-	cin >> R >> C >> K;
-	FOR(K)
+	int n, k;
+	cin >> n >> k;
+	vi P(n), C(n);
+	for (auto &p : P)
 	{
-		int r, c, k;
-		cin >> r >> c >> k;
-		r--;
-		c--;
-		V[r][c] = k;
+		cin >> p;
+		p--;
 	}
-	FOR(R)
+	for (auto &c : C)
 	{
-		FOR(j, C)
-		{
-			FOR(k, 4)
-			{
-				dp[i][j][k] = -INF;
-			}
-		}
+		cin >> c;
 	}
 
-	dp[0][0][0] = 0;
-	FOR(R)
-	{
-		FOR(j, C)
-		{
-			for (int k = 2; k >= 0; k--)
-			{
-				chmax(dp[i][j][k + 1], dp[i][j][k] + V[i][j]);
-			}
-			FOR(k, 4)
-			{
-				if (i + 1 < R)
-				{
-					chmax(dp[i + 1][j][0], dp[i][j][k]);
-				}
-				if (j + 1 < C)
-				{
-					chmax(dp[i][j + 1][k], dp[i][j][k]);
-				}
-			}
-		}
-	}
 	ll ans = -INF;
-	FOR(k, 4)
+
+	FOR(n)
 	{
-		chmax(ans, dp[R - 1][C - 1][k]);
+		ll cycle_sum = 0;
+		int cycle_len = 0;
+		int v = i;
+		do
+		{
+			cycle_len++;
+			cycle_sum += C[v];
+			v = P[v];
+		} while (i != v);
+
+		ll sum = 0;
+		int len = 0;
+
+		do
+		{
+			len++;
+			sum += C[v];
+
+			int num = (k - len) / cycle_len;
+			ll cur = sum + max(0ll, cycle_sum) * num;
+			chmax(ans, cur);
+
+			v = P[v];
+
+		} while (i != v && len < k);
 	}
 	cout << ans << en;
 }
