@@ -1,0 +1,43 @@
+[0mScanning for plugins...[0m
+[0mPlugin scan successful[0m
+
+
+[90m|[39m[31m Category      [39m[90m|[39m
+[90m|[39m ------------- [90m|[39m
+[90m|[39m analytics     [90m|[39m
+[90m|[39m api           [90m|[39m
+[90m|[39m auth          [90m|[39m
+[90m|[39m function      [90m|[39m
+[90m|[39m hosting       [90m|[39m
+[90m|[39m interactions  [90m|[39m
+[90m|[39m notifications [90m|[39m
+[90m|[39m predictions   [90m|[39m
+[90m|[39m storage       [90m|[39m
+[90m|[39m xr            [90m|[39m
+
+[0m █████╗ ███╗   ███╗██████╗ ██╗     ██╗███████╗██╗   ██╗    ███████╗██████╗  █████╗ ███╗   ███╗███████╗██╗    ██╗ ██████╗ ██████╗ ██╗  ██╗[0m
+[0m██╔══██╗████╗ ████║██╔══██╗██║     ██║██╔════╝╚██╗ ██╔╝    ██╔════╝██╔══██╗██╔══██╗████╗ ████║██╔════╝██║    ██║██╔═══██╗██╔══██╗██║ ██╔╝[0m
+[0m███████║██╔████╔██║██████╔╝██║     ██║█████╗   ╚████╔╝     █████╗  ██████╔╝███████║██╔████╔██║█████╗  ██║ █╗ ██║██║   ██║██████╔╝█████╔╝ [0m
+[0m██╔══██║██║╚██╔╝██║██╔═══╝ ██║     ██║██╔══╝    ╚██╔╝      ██╔══╝  ██╔══██╗██╔══██║██║╚██╔╝██║██╔══╝  ██║███╗██║██║   ██║██╔══██╗██╔═██╗ [0m
+[0m██║  ██║██║ ╚═╝ ██║██║     ███████╗██║██║        ██║       ██║     ██║  ██║██║  ██║██║ ╚═╝ ██║███████╗╚███╔███╔╝╚██████╔╝██║  ██║██║  ██╗[0m
+[0m╚═╝  ╚═╝╚═╝     ╚═╝╚═╝     ╚══════╝╚═╝╚═╝        ╚═╝       ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝ ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝[0m
+[0m                                                                                                                                         [0m
+[0mamplify <command> <subcommand>[0m
+
+[90m [39m init              [90m [39m Initializes a new project, sets up deployment resources in the cloud, and makes your project ready for Amplify.                              
+[90m [39m configure         [90m [39m Configures the attributes of your project for amplify-cli, such as switching front-end framework and adding/removing cloud-provider plugins. 
+[90m [39m push              [90m [39m Provisions cloud resources with the latest local developments.                                                                               
+[90m [39m pull              [90m [39m Fetch upstream backend environment definition changes from the cloud and updates the local environment to match that definition.             
+[90m [39m publish           [90m [39m Executes amplify push, and then builds and publishes client-side application for hosting.                                                    
+[90m [39m serve             [90m [39m Executes amplify push, and then executes the project's start command to test run the client-side application locally.                        
+[90m [39m status            [90m [39m Shows the state of local resources not yet pushed to the cloud (Create/Update/Delete).                                                       
+[90m [39m delete            [90m [39m Deletes all of the resources tied to the project from the cloud.                                                                             
+[90m [39m <category> add    [90m [39m Adds a resource for an Amplify category in your local backend                                                                                
+[90m [39m <category> update [90m [39m Update resource for an Amplify category in your local backend.                                                                               
+[90m [39m <category> push   [90m [39m Provisions all cloud resources in a category with the latest local developments.                                                             
+[90m [39m <category> remove [90m [39m Removes a resource for an Amplify category in your local backend.                                                                            
+[90m [39m <category>        [90m [39m Displays subcommands of the specified Amplify category.                                                                                      
+[90m [39m mock              [90m [39m Run mock server for testing categories locally.                                                                                              
+[90m [39m codegen           [90m [39m Generates GraphQL statements(queries, mutations and eventHandlers) and type annotations.                                                     
+[90m [39m env               [90m [39m Displays and manages environment related information for your Amplify project.                                                               
+[90m [39m console           [90m [39m Opens the web console for the selected cloud resource.                                                                                       
