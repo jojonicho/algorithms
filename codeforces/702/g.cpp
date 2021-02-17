@@ -92,7 +92,7 @@ void solve()
 		ll time = 0;
 		if (maxPrefixSum < x)
 		{																												 // x isn't reachable from 1 cycle
-			time = (x - maxPrefixSum + cycle_sum - 1) / cycle_sum; // ceil(x - maxPrefixSum)
+			time = (x - maxPrefixSum + cycle_sum - 1) / cycle_sum; // ceil((x - maxPrefixSum)/cycle_sum)
 		}
 		x -= time * cycle_sum;
 		cout << time * n + bin_search(maxPref, x) << " ";
