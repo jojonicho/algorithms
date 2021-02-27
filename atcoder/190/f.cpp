@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <atcoder/fenwicktree>
 using namespace std;
 using namespace __detail;
 
@@ -11,7 +12,7 @@ typedef long long ll;
 #define en '\n'
 #define FILL(x, v) memset(x, v, sizeof(x))
 #define pb push_back
-#define fast                     \
+#define fast                   \
 	ios::sync_with_stdio(false); \
 	cin.tie(NULL);               \
 	cout.tie(NULL);
@@ -22,7 +23,7 @@ typedef long long ll;
 #define F_OR4(i, b, e, s) F_OR(i, b, e, s)
 #define GET5(a, b, c, d, e, ...) e
 #define F_ORC(...) GET5(__VA_ARGS__, F_OR4, F_OR3, F_OR2, F_OR1)
-#define FOR(...)       \
+#define FOR(...)     \
 	F_ORC(__VA_ARGS__) \
 	(__VA_ARGS__)
 
@@ -30,7 +31,7 @@ typedef long long ll;
 #define E_ACH3(x, y, a) for (auto &[x, y] : a)
 #define E_ACH4(x, y, z, a) for (auto &[x, y, z] : a)
 #define E_ACHC(...) GET5(__VA_ARGS__, E_ACH4, E_ACH3, E_ACH2)
-#define EACH(...)       \
+#define EACH(...)     \
 	E_ACHC(__VA_ARGS__) \
 	(__VA_ARGS__)
 
@@ -52,4 +53,24 @@ int main()
 	fast;
 	int n;
 	cin >> n;
+
+	vi A(n);
+	FOR(n)
+	{
+		cin >> A[i];
+	}
+
+	atcoder::fenwick_tree<ll> fw(n);
+	ll ans = 0;
+	for (auto a : A)
+	{
+		ans += fw.sum(a, n);
+		fw.add(a, 1);
+	}
+
+	FOR(n)
+	{
+		cout << ans << en;
+		ans += n - 1 - 2 * A[i];
+	}
 }
