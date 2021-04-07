@@ -1,0 +1,11 @@
+{
+  "files.associations": {
+    "iostream": "cpp",
+    "ratio": "cpp",
+    "*.tcc": "cpp",
+    "bitset": "cpp",
+    "random": "cpp",
+    "limits": "cpp",
+    "type_traits": "cpp"
+  }
+}
