@@ -1,8 +1,14 @@
 #include <bits/stdc++.h>
+#include <atcoder/all>
+// python $AC_LIBRARY_PATH/expander.py d.cpp
+
 using namespace std;
+using namespace atcoder;
 using namespace __detail;
 
 typedef long long ll;
+typedef pair<ll, ll> pll;
+typedef pair<int, int> pii;
 #define ar array
 #define vi vector<int>
 #define vvi vector<vector<int>>
@@ -11,7 +17,7 @@ typedef long long ll;
 #define en '\n'
 #define FILL(x, v) memset(x, v, sizeof(x))
 #define pb push_back
-#define fast                     \
+#define fast                   \
 	ios::sync_with_stdio(false); \
 	cin.tie(NULL);               \
 	cout.tie(NULL);
@@ -22,7 +28,7 @@ typedef long long ll;
 #define F_OR4(i, b, e, s) F_OR(i, b, e, s)
 #define GET5(a, b, c, d, e, ...) e
 #define F_ORC(...) GET5(__VA_ARGS__, F_OR4, F_OR3, F_OR2, F_OR1)
-#define FOR(...)       \
+#define FOR(...)     \
 	F_ORC(__VA_ARGS__) \
 	(__VA_ARGS__)
 
@@ -30,7 +36,7 @@ typedef long long ll;
 #define E_ACH3(x, y, a) for (auto &[x, y] : a)
 #define E_ACH4(x, y, z, a) for (auto &[x, y, z] : a)
 #define E_ACHC(...) GET5(__VA_ARGS__, E_ACH4, E_ACH3, E_ACH2)
-#define EACH(...)       \
+#define EACH(...)     \
 	E_ACHC(__VA_ARGS__) \
 	(__VA_ARGS__)
 
