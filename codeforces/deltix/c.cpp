@@ -112,8 +112,9 @@ void solve() {
     cin >> x;
 
     if (x != 1) {
+      // pop until last element in stack is x-1 or empty
       while (!st.empty() && st.back() != x - 1) st.pop_back();
-      // debug() << imie(i) imie(st.back()) imie(x);
+      // pop and replace, basically increment
       if (!st.empty()) st.pop_back();
     }
 
