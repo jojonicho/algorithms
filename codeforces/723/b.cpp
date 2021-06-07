@@ -103,20 +103,6 @@ debug() << imie(k) imie(x) imie(row) imie(col);
 void solve() {
   ll n;
   cin >> n;
-  for (ll i = 11; i <= n; i = i * 10 + 1) {
-    if (n % i == 0) {
-      // debug() << imie(i);
-      cout << "YES" << en;
-      return;
-    }
-  }
-  string s = to_string(n);
-  int m = s.size();
-  if (s[m - 1] != s[m - 2]) {
-    cout << "NO" << en;
-  } else {
-    cout << "YES" << en;
-  }
 }
 
 int main() {

@@ -11,7 +11,7 @@ typedef long long ll;
 #define en '\n'
 #define FILL(x, v) memset(x, v, sizeof(x))
 #define pb push_back
-#define fast                     \
+#define fast                   \
 	ios::sync_with_stdio(false); \
 	cin.tie(NULL);               \
 	cout.tie(NULL);
@@ -22,7 +22,7 @@ typedef long long ll;
 #define F_OR4(i, b, e, s) F_OR(i, b, e, s)
 #define GET5(a, b, c, d, e, ...) e
 #define F_ORC(...) GET5(__VA_ARGS__, F_OR4, F_OR3, F_OR2, F_OR1)
-#define FOR(...)       \
+#define FOR(...)     \
 	F_ORC(__VA_ARGS__) \
 	(__VA_ARGS__)
 
@@ -30,7 +30,7 @@ typedef long long ll;
 #define E_ACH3(x, y, a) for (auto &[x, y] : a)
 #define E_ACH4(x, y, z, a) for (auto &[x, y, z] : a)
 #define E_ACHC(...) GET5(__VA_ARGS__, E_ACH4, E_ACH3, E_ACH2)
-#define EACH(...)       \
+#define EACH(...)     \
 	E_ACHC(__VA_ARGS__) \
 	(__VA_ARGS__)
 
@@ -69,9 +69,50 @@ ll nck(int n, int k)
 	return f1[n] * f2[k] % M * f2[n - k] % M;
 }
 
+bool comp(pair<int, int> a, pair<int, int> b)
+{
+	return a.second < b.second;
+}
+
 int main()
 {
 	fast;
-	int n;
-	cin >> n;
+	ll n, m;
+	cin >> n >> m;
+	// vi C(n), D(n);
+	vector<pair<int, int>> items(n);
+	FOR(n)
+	{
+		int a, b;
+		cin >> a >> b;
+		items[i] = {a, b};
+	}
+
+	sort(all(items), comp);
+	priority_queue<int, vector<int>, greater<int>> pq;
+
+	ll sum = 0;
+	ll ans = 0;
+	FOR(m)
+	{
+		auto cur = items[n - 1 - i];
+		sum += cur.first;
+		pq.push(cur.first);
+		if (i == m - 1)
+		{
+			ans = sum + cur.second * m;
+		}
+	}
+
+	for (int i = n - 1 - m; i >= 0; i--)
+	{
+		int smallestC = pq.top();
+		pq.pop();
+		auto cur = items[i];
+		sum -= smallestC;
+		sum += cur.first;
+		pq.push(cur.first);
+		chmax(ans, sum * cur.second);
+	}
+	cout << ans << en;
 }

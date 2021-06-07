@@ -1,92 +1,89 @@
 #include <bits/stdc++.h>
 using namespace std;
+using namespace __detail;
 
-#define ll long long
+typedef long long ll;
 #define ar array
 #define vi vector<int>
 #define vvi vector<vector<int>>
-#define forn(i,n) for(ll i=0; i<(n); i++)
-#define fori(i,k,n) for(ll i=k; i<(n); i++) 
-#define all(x) (x).begin(),(x).end()
+#define vll vector<long long>
+#define all(x) (x).begin(), (x).end()
 #define en '\n'
+#define FILL(x, v) memset(x, v, sizeof(x))
+#define pb push_back
+#define fast                   \
+	ios::sync_with_stdio(false); \
+	cin.tie(NULL);               \
+	cout.tie(NULL);
+#define F_OR(i, a, b, s) for (int i = (a); ((s) > 0 ? i < (b) : i > (b)); i += (s))
+#define F_OR1(e) F_OR(i, 0, e, 1)
+#define F_OR2(i, e) F_OR(i, 0, e, 1)
+#define F_OR3(i, b, e) F_OR(i, b, e, 1)
+#define F_OR4(i, b, e, s) F_OR(i, b, e, s)
+#define GET5(a, b, c, d, e, ...) e
+#define F_ORC(...) GET5(__VA_ARGS__, F_OR4, F_OR3, F_OR2, F_OR1)
+#define FOR(...)     \
+	F_ORC(__VA_ARGS__) \
+	(__VA_ARGS__)
 
-template<typename T> void print(vector<T>& a)
+#define E_ACH2(x, a) for (auto &x : a)
+#define E_ACH3(x, y, a) for (auto &[x, y] : a)
+#define E_ACH4(x, y, z, a) for (auto &[x, y, z] : a)
+#define E_ACHC(...) GET5(__VA_ARGS__, E_ACH4, E_ACH3, E_ACH2)
+#define EACH(...)     \
+	E_ACHC(__VA_ARGS__) \
+	(__VA_ARGS__)
+
+template <typename A, typename B>
+inline void chmin(A &a, B b)
 {
-	for (int i = 0; i < a.size(); i++)
-		cout << a[i] << ' ';
-	cout << en;
+	if (a > b)
+		a = b;
 }
- 
-template<typename T> void print(deque<T>& a)
+template <typename A, typename B>
+inline void chmax(A &a, B b)
 {
-	for (int i = 0; i < a.size(); i++)
-		cout << a[i] << ' ';
-	cout << en;
+	if (a < b)
+		a = b;
 }
- 
-template<typename T> void print(vector<vector<T>>& a)
+void solve()
 {
-	for (int i = 0; i < a.size(); i++)
+	int n;
+	cin >> n;
+	vll A(n), B(n);
+
+	FOR(n)
 	{
-		for (int j = 0; j < a[i].size(); j++)
-			cout << a[i][j] << ' ';
-		cout << en;
+		cin >> A[i] >> B[i];
 	}
-}
 
-void solve(){
-	// maks 300000
-	// 3e6
-	int ans = 1e9;
-    int n; cin >> n;
-	vi a(n*2), b(n*2);
-	ll tot = 0;
-	forn(i,n){
-		cin >> a[i] >> b[i];
-		tot += a[i];
-		a[n+i] = a[i];
-		b[n+i] = b[i];
-	}
-	// print(a);
-	// print(b);
-	forn(i,n) {
-		int cr = tot;
-		int cur = 0;
-		// int h = a[i];
-		int id = i;
-		bool ok = 0;
-		int left = 0;
-		while(cr > 0) {
-			int health = a[id];
-			health -= left;
-			left = 0;
-			// if(cr < a[id]) {
-			// 	cur += cr;
-			// 	break;
-			// }
-			cr -= min(cr, health);
-			cur += a[id];
-			while(b[id] >= a[id+1]&& cr>0) {
-				cr -= min(cr,a[++id]);
-			}
-			left = b[id];
-			id++;
+	ll ans = 0;
+	FOR(n)
+	{
+		int prev = i ? i - 1 : n - 1;
+		if (A[i] > B[prev])
+		{
+			ans += A[i] - B[prev];
+			A[i] = B[prev]; // let blast kill A[i]
 		}
-		ans = min(ans, cur);
 	}
-	cout << ans << en;
+
+	ll mn = A[0];
+	for (int i = 1; i < n; i++)
+	{
+		chmin(mn, A[i]);
+	}
+
+	cout << ans + mn << en;
 }
 
-int main(){
-    ios::sync_with_stdio(0);
-	cin.tie(0);
-    cout.tie(0);
- 
-#ifdef _DEBUG
-	freopen("input.txt", "r", stdin);
-#endif
-    int t; cin >> t;
-    while(t--)
-        solve();
-    return 0;
+int main()
+{
+	fast;
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		solve();
+	}
 }

@@ -1,38 +1,85 @@
 #include <bits/stdc++.h>
 using namespace std;
+using namespace __detail;
 
-#define ll long long
+typedef long long ll;
 #define ar array
+#define vi vector<int>
+#define vvi vector<vector<int>>
+#define vll vector<long long>
+#define all(x) (x).begin(), (x).end()
+#define en '\n'
+#define FILL(x, v) memset(x, v, sizeof(x))
+#define pb push_back
+#define fast                   \
+	ios::sync_with_stdio(false); \
+	cin.tie(NULL);               \
+	cout.tie(NULL);
+#define F_OR(i, a, b, s) for (int i = (a); ((s) > 0 ? i < (b) : i > (b)); i += (s))
+#define F_OR1(e) F_OR(i, 0, e, 1)
+#define F_OR2(i, e) F_OR(i, 0, e, 1)
+#define F_OR3(i, b, e) F_OR(i, b, e, 1)
+#define F_OR4(i, b, e, s) F_OR(i, b, e, s)
+#define GET5(a, b, c, d, e, ...) e
+#define F_ORC(...) GET5(__VA_ARGS__, F_OR4, F_OR3, F_OR2, F_OR1)
+#define FOR(...)     \
+	F_ORC(__VA_ARGS__) \
+	(__VA_ARGS__)
 
-int n, k, p, a[50][30];
-int dp[51][1501];
+#define E_ACH2(x, a) for (auto &x : a)
+#define E_ACH3(x, y, a) for (auto &[x, y] : a)
+#define E_ACH4(x, y, z, a) for (auto &[x, y, z] : a)
+#define E_ACHC(...) GET5(__VA_ARGS__, E_ACH4, E_ACH3, E_ACH2)
+#define EACH(...)     \
+	E_ACHC(__VA_ARGS__) \
+	(__VA_ARGS__)
 
-void solve(){
+template <typename A, typename B>
+inline void chmin(A &a, B b)
+{
+	if (a > b)
+		a = b;
+}
+template <typename A, typename B>
+inline void chmax(A &a, B b)
+{
+	if (a < b)
+		a = b;
+}
+const int N = 50, K = 30;
+const int P = N * K;
+int n, k, p, A[N][K];
+int dp[N + 1][P + 1] = {};
+
+void solve()
+{
 	cin >> n >> k >> p;
-	memset(dp, 0xc0, sizeof(dp));
-	dp[0][0] = 0;
-	for(int i = 0; i<n; ++i) {
+	for (int i = 0; i < n; i++)
+	{
+		// dp[i+1] = dp[i];
 		memcpy(dp[i+1], dp[i], sizeof(dp[0]));
-		for(int j=0, s=0; j<k; ++j) {
-			cin >> a[i][j];
-			s+=a[i][j];
-			// use j+1 plates
-			for(int l=0; l+j+1<=p; ++l)
-				dp[i+1][l+j+1]=max(dp[i][l]+s, dp[i+1][l+j+1]);
+		int sum = 0; // prefix sum for each stack
+		for (int j = 0; j < k; j++)
+		{
+			cin >> A[i][j];
+			sum += A[i][j];
+			for(int l=0; l+j+1<=p; l++) {
+				chmax(dp[i+1][j+l+1], dp[i][l] + sum);
+			}
 		}
 	}
-	cout << dp[n][p] << "\n";
+	cout << dp[n][p] << en;
 }
 
-int main(){
-	ios::sync_with_stdio(0);
-	cin.tie(0);
-
-	int t, i = 1;
+int main()
+{
+	fast;
+	int t;
 	cin >> t;
 
-	while (t--) {
-		cout << "Case #" << i++ << ": ";
+	for (int i = 1; i <= t; i++)
+	{
+		cout << "Case #" << i << ": ";
 		solve();
 	}
 }

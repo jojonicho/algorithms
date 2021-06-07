@@ -46,7 +46,13 @@
         "__node_handle": "cpp",
         "any": "cpp",
         "iostream": "cpp",
-        "span": "cpp"
+        "span": "cpp",
+        "numbers": "cpp",
+        "optional": "cpp",
+        "istream": "cpp",
+        "numeric": "cpp",
+        "ranges": "cpp",
+        "streambuf": "cpp"
     },
     "python.pythonPath": "/usr/local/opt/python@3.8/bin/python3",
     "python.formatting.provider": "black"
