@@ -1,7 +1,4 @@
 #include <bits/stdc++.h>
-
-// python $AC_LIBRARY_PATH/expander.py e.cpp
-
 using namespace std;
 using namespace __detail;
 
@@ -16,6 +13,7 @@ typedef pair<int, int> pii;
 #define en '\n'
 #define FILL(x, v) memset(x, v, sizeof(x))
 #define pb push_back
+
 #define fast                   \
   ios::sync_with_stdio(false); \
   cin.tie(NULL);               \
@@ -74,6 +72,10 @@ sim dor(rge<c> d) {
 // debug & operator << (debug & dd, P p) { dd << "(" << p.x << ", " << p.y <<
 // ")"; return dd; }
 
+#if !defined(ONLINE_JUDGE)
+#include "prettyprint.hpp"
+#endif
+
 template <typename A, typename B>
 inline void chmin(A &a, B b) {
   if (a > b) a = b;
@@ -101,33 +103,32 @@ int mod_pow(int a, int p) {
 DEBUG: -D LOCAL
 debug() << imie(k) imie(x) imie(row) imie(col);
 */
-ll r, g, b;
+const ll N = 2e5, AI = 1e9, INF = N * AI;
+ll dp[N + 5][3], A[N + 5];
+int n;
 
 int main() {
   fast;
-  int n;
   cin >> n;
-  string s;
-  cin >> s;
+  FOR(i, 1, n + 1) cin >> A[i];
 
-  for (auto c : s) {
-    if (c == 'R') r++;
-    if (c == 'G') g++;
-    if (c == 'B') b++;
+  // mirip soal best time to sell stocks, maintain state machine
+  FOR(n + 1) dp[i][0] = dp[i][1] = dp[i][2] = -INF;
+  dp[1][0] = A[1];
+  dp[2][1] = A[2];
+  dp[3][0] = A[1] + A[3];
+  dp[3][2] = A[3];
+  // we have to take exactly n/2 items
+
+  FOR(i, 4, n + 1) {
+    dp[i][0] = max(dp[i - 2][0] + A[i], dp[i][0]);
+    dp[i][1] = max({dp[i - 3][0] + A[i], dp[i - 2][1] + A[i], dp[i][1]});
+    dp[i][2] = max({dp[i - 4][0] + A[i], dp[i - 3][1] + A[i],
+                    dp[i - 2][2] + A[i], dp[i][2]});
   }
 
-  ll ans = r * g * b;
-  // j - i != k - j
-  FOR(n) {
-    FOR(h, n) {
-      /* find j - i = k - j = h
-          j = h + i
-          k = h + j
-      */
-      int j = h + i, k = h + j;
-      if (k >= n) break;
-      if (s[i] != s[j] && s[j] != s[k] && s[i] != s[k]) ans--;
-    }
-  }
-  cout << ans;
+  if (n & 1)
+    cout << max({dp[n][2], dp[n - 1][1], dp[n - 2][0]});
+  else
+    cout << max(dp[n][1], dp[n - 1][0]);
 }
