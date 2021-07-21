@@ -9,6 +9,7 @@ typedef pair<int, int> pii;
 #define vi vector<int>
 #define vvi vector<vector<int>>
 #define vll vector<long long>
+#define vpii vector<pair<int, int>>
 #define all(x) (x).begin(), (x).end()
 #define en '\n'
 #define FILL(x, v) memset(x, v, sizeof(x))
@@ -38,40 +39,6 @@ typedef pair<int, int> pii;
   E_ACHC(__VA_ARGS__) \
   (__VA_ARGS__)
 
-#define sim template <class c
-#define ris return *this
-#define dor > debug &operator<<
-#define eni(x)                                                              \
-  sim > typename enable_if<sizeof dud<c>(0) x 1, debug &>::type operator<<( \
-            c i) {
-sim > struct rge { c b, e; };
-sim > rge<c> range(c i, c j) { return rge<c>{i, j}; }
-sim > auto dud(c *x) -> decltype(cerr << *x, 0);
-sim > char dud(...);
-struct debug {
-#ifdef LOCAL
-  ~debug() { cerr << endl; }
-  eni(!=) cerr << boolalpha << i;
-  ris;
-} eni(==) ris << range(begin(i), end(i));
-}
-sim, class b dor(pair<b, c> d) {
-  ris << "(" << d.first << ", " << d.second << ")";
-}
-sim dor(rge<c> d) {
-  *this << "[";
-  for (auto it = d.b; it != d.e; ++it) *this << ", " + 2 * (it == d.b) << *it;
-  ris << "]";
-}
-#else
-  sim dor(const c &) { ris; }
-#endif
-}
-;
-#define imie(...) " [" << #__VA_ARGS__ ": " << (__VA_ARGS__) << "] "
-// debug & operator << (debug & dd, P p) { dd << "(" << p.x << ", " << p.y <<
-// ")"; return dd; }
-
 template <typename A, typename B>
 inline void chmin(A &a, B b) {
   if (a > b) a = b;
@@ -80,69 +47,6 @@ template <typename A, typename B>
 inline void chmax(A &a, B b) {
   if (a < b) a = b;
 }
-
-const int M = 1e9 + 7;
-
-int mul(const int v1, const int v2) { return (int)((1LL * v1 * v2) % M); }
-
-int mod_pow(int a, int p) {
-  int res = 1;
-  while (p != 0) {
-    if (p & 1) res = mul(res, a);
-    p >>= 1;
-    a = mul(a, a);
-  }
-  return res;
-}
-
-const int N = 5e5;
-
-ll iv[N + 1], fact[N + 1], ifact[N + 1];
-ll nCk(int n, int k) { return fact[n] * ifact[k] % M * ifact[n - k] % M; }
-
-void pre() {
-  iv[1] = fact[0] = fact[1] = ifact[0] = ifact[1] = 1;
-
-  for (int i = 2; i <= N; i++) {
-    iv[i] = M - M / i * iv[M % i] % M;
-    fact[i] = fact[i - 1] * i % M;
-    ifact[i] = ifact[i - 1] * iv[i] % M;
-  }
-}
-
-/*
-TRIE
-*/
-struct TrieNode {
-  TrieNode *children[27];
-  int idx;
-  TrieNode() {
-    idx = 0;
-    memset(children, 0, sizeof(children));
-  }
-
-  void insert(string word, int idx) {
-    TrieNode *cur = this;
-    for (char &c : word) {
-      if (!cur->children[c - 'a']) {
-        cur->children[c - 'a'] = new TrieNode();
-      }
-      cur = cur->children[c - 'a'];
-      cur->idx = idx;
-    }
-  }
-
-  int find(string word) {
-    TrieNode *cur = this;
-    for (char c : word) {
-      if (!cur->children[c - 'a']) {
-        return -1;
-      }
-      cur = cur->children[c - 'a'];
-    }
-    return cur->idx;
-  }
-};
 
 /*
 DEBUG: -D LOCAL

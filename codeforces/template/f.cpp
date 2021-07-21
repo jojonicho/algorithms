@@ -9,6 +9,7 @@ typedef pair<int, int> pii;
 #define vi vector<int>
 #define vvi vector<vector<int>>
 #define vll vector<long long>
+#define vpii vector<pair<int, int>>
 #define all(x) (x).begin(), (x).end()
 #define en '\n'
 #define FILL(x, v) memset(x, v, sizeof(x))
@@ -71,29 +72,6 @@ sim dor(rge<c> d) {
 #define imie(...) " [" << #__VA_ARGS__ ": " << (__VA_ARGS__) << "] "
 // debug & operator << (debug & dd, P p) { dd << "(" << p.x << ", " << p.y <<
 // ")"; return dd; }
-
-template <typename A, typename B>
-inline void chmin(A &a, B b) {
-  if (a > b) a = b;
-}
-template <typename A, typename B>
-inline void chmax(A &a, B b) {
-  if (a < b) a = b;
-}
-
-const int M = 1e9 + 7;
-
-int mul(const int v1, const int v2) { return (int)((1LL * v1 * v2) % M); }
-
-int mod_pow(int a, int p) {
-  int res = 1;
-  while (p != 0) {
-    if (p & 1) res = mul(res, a);
-    p >>= 1;
-    a = mul(a, a);
-  }
-  return res;
-}
 
 /*
 DEBUG: -D LOCAL
