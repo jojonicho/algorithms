@@ -3,6 +3,8 @@ using namespace std;
 using namespace __detail;
 
 typedef long long ll;
+typedef pair<ll, ll> pll;
+typedef pair<int, int> pii;
 #define ar array
 #define vi vector<int>
 #define vvi vector<vector<int>>
@@ -11,11 +13,13 @@ typedef long long ll;
 #define en '\n'
 #define FILL(x, v) memset(x, v, sizeof(x))
 #define pb push_back
+
 #define fast                   \
-	ios::sync_with_stdio(false); \
-	cin.tie(NULL);               \
-	cout.tie(NULL);
-#define F_OR(i, a, b, s) for (int i = (a); ((s) > 0 ? i < (b) : i > (b)); i += (s))
+  ios::sync_with_stdio(false); \
+  cin.tie(NULL);               \
+  cout.tie(NULL);
+#define F_OR(i, a, b, s) \
+  for (int i = (a); ((s) > 0 ? i < (b) : i > (b)); i += (s))
 #define F_OR1(e) F_OR(i, 0, e, 1)
 #define F_OR2(i, e) F_OR(i, 0, e, 1)
 #define F_OR3(i, b, e) F_OR(i, b, e, 1)
@@ -23,42 +27,104 @@ typedef long long ll;
 #define GET5(a, b, c, d, e, ...) e
 #define F_ORC(...) GET5(__VA_ARGS__, F_OR4, F_OR3, F_OR2, F_OR1)
 #define FOR(...)     \
-	F_ORC(__VA_ARGS__) \
-	(__VA_ARGS__)
+  F_ORC(__VA_ARGS__) \
+  (__VA_ARGS__)
 
 #define E_ACH2(x, a) for (auto &x : a)
 #define E_ACH3(x, y, a) for (auto &[x, y] : a)
 #define E_ACH4(x, y, z, a) for (auto &[x, y, z] : a)
 #define E_ACHC(...) GET5(__VA_ARGS__, E_ACH4, E_ACH3, E_ACH2)
 #define EACH(...)     \
-	E_ACHC(__VA_ARGS__) \
-	(__VA_ARGS__)
+  E_ACHC(__VA_ARGS__) \
+  (__VA_ARGS__)
+
+#define sim template <class c
+#define ris return *this
+#define dor > deb &operator<<
+#define eni(x) \
+  sim > typename enable_if<sizeof dud<c>(0) x 1, deb &>::type operator<<(c i) {
+sim > struct rge { c b, e; };
+sim > rge<c> range(c i, c j) { return rge<c>{i, j}; }
+sim > auto dud(c *x) -> decltype(cerr << *x, 0);
+sim > char dud(...);
+struct deb {
+#ifdef LOCAL
+  ~deb() { cerr << endl; }
+  eni(!=) cerr << boolalpha << i;
+  ris;
+} eni(==) ris << range(begin(i), end(i));
+}
+sim, class b dor(pair<b, c> d) {
+  ris << "(" << d.first << ", " << d.second << ")";
+}
+sim dor(rge<c> d) {
+  *this << "[";
+  for (auto it = d.b; it != d.e; ++it) *this << ", " + 2 * (it == d.b) << *it;
+  ris << "]";
+}
+#else
+  sim dor(const c &) { ris; }
+#endif
+}
+;
+#define im(...) " [" << #__VA_ARGS__ ": " << (__VA_ARGS__) << "] "
+// debug & operator << (debug & dd, P p) { dd << "(" << p.x << ", " << p.y <<
+// ")"; return dd; }
 
 template <typename A, typename B>
-inline void chmin(A &a, B b)
-{
-	if (a > b)
-		a = b;
+inline void chmin(A &a, B b) {
+  if (a > b) a = b;
 }
 template <typename A, typename B>
-inline void chmax(A &a, B b)
-{
-	if (a < b)
-		a = b;
+inline void chmax(A &a, B b) {
+  if (a < b) a = b;
 }
 
-void solve()
-{
-	int n;
-	cin >> n;
+const int M = 1e9 + 7;
+
+int mul(const int v1, const int v2) { return (int)((1LL * v1 * v2) % M); }
+
+int mod_pow(int a, int p) {
+  int res = 1;
+  while (p != 0) {
+    if (p & 1) res = mul(res, a);
+    p >>= 1;
+    a = mul(a, a);
+  }
+  return res;
 }
-int main()
-{
-	fast;
-	int t;
-	cin >> t;
-	while (t--)
-	{
-		solve();
-	}
+
+/*
+DEBUG: -D LOCAL
+debug() << imie(k) imie(x) imie(row) imie(col);
+*/
+int main() {
+  fast;
+  int n;
+  cin >> n;
+
+  int dp[n + 5] = {};
+  int A[n + 5] = {}, mp[n + 5] = {};
+  ar<int, 2> range[n + 5];
+  memset(range, -1, sizeof(range));
+  FOR(n) {
+    int x;
+    cin >> x;
+    A[i] = x;
+
+    range[x][1] = i;
+    if (range[x][0] == -1) {
+      range[x][0] = i;
+    }
+  }
+
+  for (int i = n - 1; i >= 0; i--) {
+    mp[A[i]]++;
+    if (range[A[i]][0] == i) {  // left most occurence of this shit
+      dp[i] = max(dp[i + 1], dp[range[A[i]][1] + 1] + mp[A[i]]);
+    } else {
+      dp[i] = max(mp[A[i]], dp[i + 1]);
+    }
+  }
+  cout << n - dp[0] << en;
 }

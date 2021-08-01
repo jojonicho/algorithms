@@ -93,8 +93,9 @@ const int N = 3005;
 using mint = modint1000000007;
 
 int n;
-mint dp[N][N];  // mod, idx
+mint dp[N][N];  // segment, idx
 ll pref[N];
+
 int main() {
   cin >> n;
   for (int i = 0; i < n; i++) {
@@ -113,12 +114,16 @@ int main() {
       int rem = pref[j] % i;
       dp[i][j] += cnt[rem];
       cnt[rem] += dp[i - 1][j];
-      debug() << imie(i) imie(j) imie(rem) imie(cnt[rem].val());
+      debug() << imie(i) imie(j) imie(pref[j]) imie(rem) imie(dp[i][j].val())
+              imie(cnt[rem].val());
     }
   }
 
   mint ans = 0;
-  for (int i = 1; i <= n; i++) ans += dp[i][n];
+  for (int i = 1; i <= n; i++) {
+    debug() << imie(i) imie(dp[i][n].val());
+    ans += dp[i][n];
+  };
   cout << ans.val() << endl;
   return 0;
 }

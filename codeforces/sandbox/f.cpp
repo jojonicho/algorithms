@@ -99,17 +99,27 @@ int mod_pow(int a, int p) {
 DEBUG: -D LOCAL
 debug() << imie(k) imie(x) imie(row) imie(col);
 */
-
-void solve() {
-  int n;
-  cin >> n;
-}
+const int N = 3e5;
+ll A[N + 5];
 
 int main() {
   fast;
-  int t;
-  cin >> t;
-  while (t--) {
-    solve();
+  int n, x;
+  cin >> n >> x;
+  FOR(n) { cin >> A[i]; }
+
+  ll ans = 0, normal = 0, multiplying = 0, multiplied = 0;
+
+  for (auto a : A) {
+    multiplied = max({0ll, normal + a, multiplying + a, multiplied + a});
+    multiplying = max({
+        0ll,
+        x * a,
+        multiplying + x * a,
+        normal + x * a,
+    });                                  // kadane with multiplier
+    normal = max({0ll, a, normal + a});  // normal kadane
+    ans = max({ans, normal, multiplying, multiplied});
   }
+  cout << ans << en;
 }
