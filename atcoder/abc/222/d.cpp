@@ -192,6 +192,7 @@ int main() {
 
   int A[n + 1], B[n + 1];
   int MX = 0;
+
   FOR(i, 1, n + 1) {
     cin >> A[i];
     MX = max(MX, A[i]);
