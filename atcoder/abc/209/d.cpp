@@ -106,6 +106,14 @@ debug() << imie(k) imie(x) imie(row) imie(col);
 
 int main() {
   fast;
-  int n;
-  cin >> n;
+  int n, q;
+  cin >> n >> q;
+
+  FOR(n) {}
+
+  FOR(q) {
+    int c, d;
+    cin >> c >> d;
+    if(dist[c
+  }
 }

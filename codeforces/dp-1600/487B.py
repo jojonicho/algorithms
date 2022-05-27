@@ -29,10 +29,10 @@ def solve(N, S, L, A):
     for i in range(1, N + 1):
         x = A[i]
         # maintain monotonic queue
-        while qmax and A[qmax[-1]] <= x:  # increasing
+        while qmax and A[qmax[-1]] <= x:  # decreasing
             qmax.pop()
         qmax.append(i)
-        while qmin and A[qmin[-1]] >= x:  # decreasing
+        while qmin and A[qmin[-1]] >= x:  # increasing
             qmin.pop()
         qmin.append(i)
 
@@ -43,6 +43,9 @@ def solve(N, S, L, A):
             while qmin and qmin[0] <= j:
                 qmin.popleft()
             j += 1
+
+        print(i, [A[x] for x in qmin], [A[x] for x in qmax])
+        # print(i, qmin, qmax)
 
         # [j,i] is the longest segment now
         if i >= L:

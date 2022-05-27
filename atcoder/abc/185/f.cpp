@@ -110,13 +110,14 @@ struct fenwick {
   }
   T get(int i) {
     T ans = 0;
+    i++;
     while (i > 0) {
       ans ^= BIT[i];
       i -= i & -i;
     }
     return ans;
   }
-  T sum(int L, int R) { return (get(min(R, N)) ^ get(max(L, 0))); }
+  T get(int L, int R) { return (get(R) ^ get(L)); }
 };
 
 int main() {
@@ -135,7 +136,7 @@ int main() {
     cin >> t >> x >> y;
     t--;
     if (t) {
-      cout << fw.sum(x, y + 1) << en;
+      cout << fw.get(x - 1, y) << en;
     } else {
       fw.add(x, y);
     }

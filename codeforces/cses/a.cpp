@@ -111,40 +111,6 @@ void pre() {
 }
 
 /*
-TRIE
-*/
-struct TrieNode {
-  TrieNode *children[27];
-  int idx;
-  TrieNode() {
-    idx = 0;
-    memset(children, 0, sizeof(children));
-  }
-
-  void insert(string word, int idx) {
-    TrieNode *cur = this;
-    for (char &c : word) {
-      if (!cur->children[c - 'a']) {
-        cur->children[c - 'a'] = new TrieNode();
-      }
-      cur = cur->children[c - 'a'];
-      cur->idx = idx;
-    }
-  }
-
-  int find(string word) {
-    TrieNode *cur = this;
-    for (char c : word) {
-      if (!cur->children[c - 'a']) {
-        return -1;
-      }
-      cur = cur->children[c - 'a'];
-    }
-    return cur->idx;
-  }
-};
-
-/*
 DEBUG: -D LOCAL
 debug() << imie(k) imie(x) imie(row) imie(col);
 */

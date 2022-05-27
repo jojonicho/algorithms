@@ -1,10 +1,10 @@
 #include <bits/stdc++.h>
 
-#include <atcoder/all>
-// python $AC_LIBRARY_PATH/expander.py f.cpp
+//#include <atcoder/all>
+// python $AC_LIBRARY_PATH/expander.py a.cpp
 
 using namespace std;
-using namespace atcoder;
+//using namespace atcoder;
 using namespace __detail;
 
 typedef long long ll;
@@ -72,7 +72,7 @@ sim dor(rge<c> d) {
 #endif
 }
 ;
-#define imie(...) " [" << #__VA_ARGS__ ": " << (__VA_ARGS__) << "] "
+#define im(...) " [" << #__VA_ARGS__ ": " << (__VA_ARGS__) << "] "
 // debug & operator << (debug & dd, P p) { dd << "(" << p.x << ", " << p.y <<
 // ")"; return dd; }
 
@@ -85,20 +85,6 @@ inline void chmax(A &a, B b) {
   if (a < b) a = b;
 }
 
-const int M = 1e9 + 7;
-
-int mul(const int v1, const int v2) { return (int)((1LL * v1 * v2) % M); }
-
-int mod_pow(int a, int p) {
-  int res = 1;
-  while (p != 0) {
-    if (p & 1) res = mul(res, a);
-    p >>= 1;
-    a = mul(a, a);
-  }
-  return res;
-}
-
 /*
 DEBUG: -D LOCAL
 debug() << imie(k) imie(x) imie(row) imie(col);
@@ -106,6 +92,4 @@ debug() << imie(k) imie(x) imie(row) imie(col);
 
 int main() {
   fast;
-  int n;
-  cin >> n;
 }

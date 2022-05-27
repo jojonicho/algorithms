@@ -1,24 +1,26 @@
 #include <bits/stdc++.h>
 using namespace std;
-using namespace __detail;
 
 typedef long long ll;
 typedef pair<ll, ll> pll;
 typedef pair<int, int> pii;
+
+#define vt vector
 #define ar array
 #define vi vector<int>
 #define vvi vector<vector<int>>
 #define vll vector<long long>
 #define vpii vector<pair<int, int>>
 #define all(x) (x).begin(), (x).end()
+#define sz(x) (int)(x).size()
 #define en '\n'
 #define FILL(x, v) memset(x, v, sizeof(x))
 #define pb push_back
 
 #define fast                   \
   ios::sync_with_stdio(false); \
-  cin.tie(NULL);               \
-  cout.tie(NULL);
+  cin.tie(NULL);
+
 #define F_OR(i, a, b, s) \
   for (int i = (a); ((s) > 0 ? i < (b) : i > (b)); i += (s))
 #define F_OR1(e) F_OR(i, 0, e, 1)
@@ -39,30 +41,52 @@ typedef pair<int, int> pii;
   E_ACHC(__VA_ARGS__) \
   (__VA_ARGS__)
 
-template <typename A, typename B>
-inline void chmin(A &a, B b) {
-  if (a > b) a = b;
+#define sim template <class c
+#define ris return *this
+#define dor > dbg &operator<<
+#define eni(x)                                                              \
+  sim > typename enable_if<sizeof dud<c>(0) x 1, dbg &>::type operator<<( \
+            c i) {
+sim > struct rge { c b, e; };
+sim > rge<c> range(c i, c j) { return rge<c>{i, j}; }
+sim > auto dud(c *x) -> decltype(cerr << *x, 0);
+sim > char dud(...);
+struct dbg {
+#ifdef LOCAL
+  ~dbg() { cerr << endl; }
+  eni(!=) cerr << boolalpha << i;
+  ris;
+} eni(==) ris << range(begin(i), end(i));
 }
-template <typename A, typename B>
-inline void chmax(A &a, B b) {
-  if (a < b) a = b;
+sim, class b dor(pair<b, c> d) {
+  ris << "(" << d.first << ", " << d.second << ")";
 }
+sim dor(rge<c> d) {
+  *this << "[";
+  for (auto it = d.b; it != d.e; ++it) *this << ", " + 2 * (it == d.b) << *it;
+  ris << "]";
+}
+#else
+  sim dor(const c &) { ris; }
+#endif
+};
+
+#define im(...) " [" << #__VA_ARGS__ ": " << (__VA_ARGS__) << "] "
 
 /*
-DEBUG: -D LOCAL
-debug() << imie(k) imie(x) imie(row) imie(col);
+if WA:
+  1. DON'T RETURN BEFORE READING ALL INPUT
+  2. CHECK SMALL CASES (n == 1)
+  3. CHECK ARRAY SIZE, dp[50], cout << dp[100]
 */
 
 void solve() {
-  int n;
-  cin >> n;
 }
 
 int main() {
   fast;
-  int t;
-  cin >> t;
-  while (t--) {
+  int t=1;
+  //cin >> t;
+  while(t--)
     solve();
-  }
 }

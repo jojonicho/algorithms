@@ -101,7 +101,7 @@ void solve() {
   }
   // int cnt1 = 0, cnt2 = 0;
 
-  // priority_queue<int, vi, greater<int>> pq;
+  priority_queue<int, vi, greater<int>> pq;
   // FOR(k)
   // pq.push(0);
   int cnt = 0;
@@ -115,6 +115,7 @@ void solve() {
     //   cnt1++;
     // }
   }
+
   debug() << imie(cnt);
   // for (auto &[x, y] : mp) {
   //   int o = pq.top();

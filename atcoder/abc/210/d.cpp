@@ -106,6 +106,24 @@ debug() << imie(k) imie(x) imie(row) imie(col);
 
 int main() {
   fast;
-  int n;
-  cin >> n;
-}
+  int h, w;
+  ll c;
+  cin >> h >> w >> c;
+
+  // ll A[h][w];
+  int tot = h + w;
+  ar<ll, 3> A[tot];
+
+  FOR(h) {
+    FOR(j, w) {
+      cin >> A[i + j][0];
+      A[i + j][1] = i;
+      A[i + j][2] = j;
+    }
+
+    ll ans = 1e18 + 10;
+    FOR(h) {
+      FOR(j, w) { ll cur = c * abs(A[i][j]) chmin(ans, cur); }
+    }
+    cout << ans;
+  }

@@ -92,13 +92,12 @@ int main() {
     dp[A[i]] = A[i];
   }
 
-  FOR(M) {
-    FOR(mask, MASK) {
-      if ((mask >> i) & 1) {
-        dp[mask] = max(dp[mask], dp[mask ^ (1 << i)]);
-      }
-    }
-  }
+  FOR(M)
+  FOR(mask, MASK)
+  if ((mask >> i) & 1)
+    dp[mask] =
+        max(dp[mask], dp[mask ^ (1 << i)]);  // if x & y = 0, then turning i'th
+                                             // bit off will still = 0
 
   FOR(n) cout << dp[(MASK - 1) ^ A[i]] << " ";
   cout << en;

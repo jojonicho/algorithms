@@ -104,10 +104,38 @@ DEBUG: -D LOCAL
 debug() << imie(k) imie(x) imie(row) imie(col);
 */
 
+using mint = modint998244353;
+using vm = vector<mint>;
+
 int main() {
   fast;
-  int n, m, k;
+  int n, m, k;  // k day trip
   cin >> n >> m >> k;
-  ll ans = n * n;
-  cout << ans;
+
+  vi banned[n];
+
+  FOR(m) {
+    int u, v;
+    cin >> u >> v, u--, v--;
+    banned[u].pb(v);
+    banned[v].pb(u);
+  }
+
+  vm dp(n);
+  dp[0] = 1;
+
+  while (k--) {
+    vm dp2(n);
+    mint sum = 0;
+    FOR(n) sum += dp[i];
+    FOR(n) {
+      dp2[i] = sum - dp[i];  // cant go to and from self
+      for (auto v : banned[i]) {
+        dp2[i] -= dp[v];
+      }
+    }
+    dp = dp2;
+  }
+
+  cout << dp[0].val();
 }

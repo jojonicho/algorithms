@@ -114,12 +114,8 @@ int dp[N][N], L[N], R[N];
 int n;
 
 int grundy(int l, int r) {
-  if (l >= r) {
-    return 0;
-  }
-  if (dp[l][r] != -1) {
-    return dp[l][r];
-  }
+  if (l >= r) return 0;
+  if (dp[l][r] != -1) return dp[l][r];
 
   bool mex[N] = {};
   FOR(n) {

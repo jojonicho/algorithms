@@ -82,9 +82,8 @@ g[i + 1] <  = g[i] + 1 so it's also a sliding window minimum pro
 const int N = 1e5 + 5;
 
 int A[N], dp[N];
-deque<pii> q;
-deque<int> qmax, qmin;  // dp, maxValues, minValues
-int n, s, l;            // s = max-min, l = groupLen
+deque<int> q, qmax, qmin;  // dp, maxValues, minValues
+int n, s, l;               // s = max-min, l = groupLen
 
 int main() {
   cin >> n >> s >> l;
@@ -96,9 +95,9 @@ int main() {
     dp[i] = INF;
 
     int x = A[i];
-    while (!qmax.empty() && A[qmax.back()] <= x) qmax.pop_back();  // increasing
+    while (!qmax.empty() && A[qmax.back()] <= x) qmax.pop_back();  // decreasing
     qmax.push_back(i);
-    while (!qmin.empty() && A[qmin.back()] >= x) qmin.pop_back();  // decreasing
+    while (!qmin.empty() && A[qmin.back()] >= x) qmin.pop_back();  // increasing
     qmin.push_back(i);
 
     // valid qmin and qmax, find minimum j where A[qmax[0]] - A[qmin[0]] <= s
@@ -109,17 +108,19 @@ int main() {
       while (!qmax.empty() && qmax[0] <= j) qmax.pop_front();
       j++;
     }
+    // [j,i-L] is the longest segment now
+    // debug() << imie(i) imie(j) imie(qmin) imie(qmax);
 
     // process q
     if (i >= l) {  // cur idx at least required size
-                   // g[i + 1] <= g[i] + 1
-      while (!q.empty() && q.back().second >= dp[i - l]) q.pop_back();
-      q.push_back({i - l, dp[i - l]});
+      while (!q.empty() && dp[q.back()] + 1 > dp[i - l])
+        q.pop_back();  // g[i + 1] <= g[i] + 1
+      q.push_back(i - l);
     }
     // j - 1 <= k <= i - L
-    while (!q.empty() && q[0].first < j - 1) q.pop_front();
+    while (!q.empty() && q[0] < j - 1) q.pop_front();
 
-    if (!q.empty()) dp[i] = q[0].second + 1;
+    if (!q.empty()) dp[i] = dp[q[0]] + 1;
   }
 
   if (dp[n] >= INF) dp[n] = -1;

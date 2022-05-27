@@ -69,25 +69,24 @@ sim dor(rge<c> d) {
 #endif
 }
 ;
-#define imie(...) " [" << #__VA_ARGS__ ": " << (__VA_ARGS__) << "] "
+#define im(...) " [" << #__VA_ARGS__ ": " << (__VA_ARGS__) << "] "
 // debug & operator << (debug & dd, P p) { dd << "(" << p.x << ", " << p.y <<
 // ")"; return dd; }
+
+template <typename A, typename B>
+inline void chmin(A &a, B b) {
+  if (a > b) a = b;
+}
+template <typename A, typename B>
+inline void chmax(A &a, B b) {
+  if (a < b) a = b;
+}
 
 /*
 DEBUG: -D LOCAL
 debug() << imie(k) imie(x) imie(row) imie(col);
 */
 
-void solve() {
-  int n;
-  cin >> n;
-}
-
 int main() {
   fast;
-  int t;
-  cin >> t;
-  while (t--) {
-    solve();
-  }
 }

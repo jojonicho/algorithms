@@ -15,6 +15,7 @@ typedef pair<int, int> pii;
 #define vvi vector<vector<int>>
 #define vll vector<long long>
 #define all(x) (x).begin(), (x).end()
+#define sz(x) (int)x.size()
 #define en '\n'
 #define FILL(x, v) memset(x, v, sizeof(x))
 #define pb push_back

@@ -116,7 +116,7 @@ int main() {
   int ans[N];
   set<ar<int, 2>> st;  // room with {end time, room number}
   for (int i = 0; i < n; i++) {
-    auto it = st.lower_bound({A[i][1]});  // find non occupied room
+    auto it = st.lower_bound({A[i][1], 0});  // find non occupied room
     if (it == st.begin()) {
       // increase number of rooms
       ans[A[i][2]] = st.size();

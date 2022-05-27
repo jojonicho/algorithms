@@ -99,6 +99,7 @@ void solve() {
   cout << ans << en;
 }
 
+
 int main() {
   fast;
   int t;
